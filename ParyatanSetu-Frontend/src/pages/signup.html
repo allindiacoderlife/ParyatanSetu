@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ParyatanSetu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Sign up for ParyatanSetu</h1>
+        <div class="user-type-toggle">
+            <button class="user-type-btn active" data-type="visitor">Visitor</button>
+            <button class="user-type-btn" data-type="service-provider">Service Provider</button>
+        </div>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group service-provider-field hidden">
+                <label for="service-type">Type of Service</label>
+                <select id="service-type">
+                    <option value="">Select a service type</option>
+                    <option value="accommodation">Accommodation</option>
+                    <option value="transportation">Transportation</option>
+                    <option value="tour-guide">Tour Guide</option>
+                    <option value="restaurant">Restaurant</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Sign up</button>
+        </form>
+        <p class="auth-link">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+    <script src="log-signup.js"></script>
+</body>
+</html>

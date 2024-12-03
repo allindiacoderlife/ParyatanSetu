@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Profile - ParyatanSetu</title>
+    <link rel="stylesheet" href="profile-styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">ParyatanSetu</a>
+            <div class="account-switcher">
+                <button id="current-account">Current Account</button>
+                <ul id="account-list" class="hidden">
+                    <!-- Account list will be populated by JavaScript -->
+                </ul>
+            </div>
+            <a href="settings.html" class="settings-link">Settings</a>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-header">
+            <img src="/placeholder.svg?height=150&width=150" alt="Profile Picture" class="profile-picture">
+            <h1 id="username">Visitor Name</h1>
+            <p id="user-type">Visitor</p>
+        </section>
+
+        <section class="profile-content">
+            <div class="tab-container">
+                <button class="tab-button active" data-tab="payment-history">Payment History</button>
+                <button class="tab-button" data-tab="saved-trips">Saved Trips</button>
+                <button class="tab-button" data-tab="preferences">My Preferences</button>
+                <button class="tab-button" data-tab="bookings">My Bookings</button>
+            </div>
+
+            <div id="payment-history" class="tab-content active">
+                <h2>Payment History</h2>
+                <ul class="payment-list">
+                    <!-- Payment history will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div id="saved-trips" class="tab-content">
+                <h2>Saved Trips</h2>
+                <div class="trip-grid">
+                    <!-- Saved trips will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div id="preferences" class="tab-content">
+                <h2>My Preferences</h2>
+                <form id="preferences-form">
+                    <label>
+                        Preferred Destinations:
+                        <input type="text" name="destinations" placeholder="e.g., Beach, Mountains, Cities">
+                    </label>
+                    <label>
+                        Travel Style:
+                        <select name="travel-style">
+                            <option value="luxury">Luxury</option>
+                            <option value="budget">Budget</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="cultural">Cultural</option>
+                        </select>
+                    </label>
+                    <label>
+                        Dietary Restrictions:
+                        <input type="text" name="dietary" placeholder="e.g., Vegetarian, Gluten-free">
+                    </label>
+                    <button type="submit">Save Preferences</button>
+                </form>
+            </div>
+
+            <div id="bookings" class="tab-content">
+                <h2>My Bookings</h2>
+                <ul class="booking-list">
+                    <!-- Bookings will be populated by JavaScript -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="profile-script.js"></script>
+</body>
+</html>

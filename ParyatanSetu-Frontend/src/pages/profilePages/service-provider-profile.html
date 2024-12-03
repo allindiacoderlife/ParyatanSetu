@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Profile - ParyatanSetu</title>
+    <link rel="stylesheet" href="profile-styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">ParyatanSetu</a>
+            <div class="account-switcher">
+                <button id="current-account">Current Account</button>
+                <ul id="account-list" class="hidden">
+                    <!-- Account list will be populated by JavaScript -->
+                </ul>
+            </div>
+            <a href="settings.html" class="settings-link">Settings</a>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-header">
+            <img src="/placeholder.svg?height=150&width=150" alt="Profile Picture" class="profile-picture">
+            <h1 id="username">Service Provider Name</h1>
+            <p id="user-type">Service Provider</p>
+            <p id="service-type">Service Type</p>
+        </section>
+
+        <section class="profile-content">
+            <div class="tab-container">
+                <button class="tab-button active" data-tab="payment-history">Payment History</button>
+                <button class="tab-button" data-tab="services">My Services</button>
+                <button class="tab-button" data-tab="bookings">Bookings</button>
+                <button class="tab-button" data-tab="reviews">Reviews</button>
+            </div>
+
+            <div id="payment-history" class="tab-content active">
+                <h2>Payment History</h2>
+                <ul class="payment-list">
+                    <!-- Payment history will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div id="services" class="tab-content">
+                <h2>My Services</h2>
+                <div class="service-grid">
+                    <!-- Services will be populated by JavaScript -->
+                </div>
+                <button id="add-service" class="add-button">Add New Service</button>
+            </div>
+
+            <div id="bookings" class="tab-content">
+                <h2>Bookings</h2>
+                <ul class="booking-list">
+                    <!-- Bookings will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <h2>Reviews</h2>
+                <ul class="review-list">
+                    <!-- Reviews will be populated by JavaScript -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="profile-script.js"></script>
+</body>
+</html>

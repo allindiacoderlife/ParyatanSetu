@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParyatanSetu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar primary-navbar">
+            <div class="navbar-container">
+                <a href="/" class="logo-container">
+                    <img src="../imageSection/logo.jpg"height=40 width=40 alt="ParyatanSetu Logo" class="logo">
+                    <span class="logo-text">ParyatanSetu</span>
+                </a>
+                <div class="nav-items">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search tourism spots" class="search-input">
+                        <button class="search-button" aria-label="Search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
+                    <div class="user-menu-container">
+                        <button class="user-menu-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="user-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <span class="user-initial hidden"></span>
+                            <img src="" alt="User Profile" class="user-profile-pic hidden">
+                        </button>
+                        <div class="user-dropdown hidden">
+                            <a href="#" class="dropdown-item">Your Profile</a>
+                            <a href="#" class="dropdown-item">Add Account</a>
+                            <a href="#" class="dropdown-item">Settings</a>
+                            <a href="#" class="dropdown-item">Sign Out</a>
+                        </div>
+                    </div>
+                    <!-- <button class="login-button" aria-label="Login">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="user-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </button> -->
+                    <div class="menu-container">
+                        <button class="menu-button" aria-label="Menu">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="#explore-events">Explore Events</a></li>
+                            <li><a href="#government-schemes">Government Schemes</a></li>
+                            <li><a href="#plan-a-trip">Plan a trip</a></li>
+                            <li><a href="#local-services">Local Services</a></li>
+                            <li><a href="#virtual-view">Virtual view</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="#faq">Help</a></li>
+                            <li><a href="../feedback/feedback.html"  target="_main">Feedback</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <nav class="navbar secondary-navbar">
+                <div class="navbar-container">
+                    <ul class="travel-options">
+                        <li>
+                            <a href="../bookings/flights/index.html" class="travel-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+                                <span>Flights</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../bookings/trains/index.html" class="travel-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <span>Trains</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../bookings/cabs/index.html" class="travel-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                <span>Cabs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../bookings/hotels/index.html" class="travel-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Hotels</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../localServices/guides/index.html" class="travel-option">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                                <span>Guides</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </nav>
+    </header>
+    <main class="main-banner">
+        <video id="video-0" src="imageSection/India-360-v2.mp4" type="video/mp4" playsinline muted autoplay loop>
+        </video>
+        <!-- <div class="banner-slider">
+            
+            <img src="https://media.istockphoto.com/id/155096944/photo/taj-mahal-sunrise.jpg?s=612x612&w=0&k=20&c=SR-5FqC8K5cMJwUbLa-UQGAvZdJ48rLrdg63bBYpsDU=" height=500 width=1200 alt="Beautiful landscape 1" class="banner-image">
+            <img src="https://media.istockphoto.com/id/478673422/photo/golden-temple-amritsar.jpg?s=612x612&w=0&k=20&c=LvdukkiiqHZmQxOTjf9UPGHcWldxaFLIZc8k2FEFxfM="height=500 width=1200 alt="Beautiful landscape 2" class="banner-image">
+            <img src="https://i.pinimg.com/564x/39/97/79/3997790097428ce4372cdab636a5293b.jpg" height=500 width=1200 alt="Beautiful landscape 3" class="banner-image">
+        </div> -->
+        <div class="tagline-container">
+            <h1 class="tagline" id="main-tagline">Discover the beauty of India!</h1>
+            <div class="cursor"></div>
+        </div>
+        <div class="sub-tagline">
+            <h5>Your Gateway to Incredible Experiences with ParyatanSetu</h5>
+        </div>
+        
+    </main>
+    <section class="features-section">
+        <div class="features-container">
+            <h2 class="features-title">Discover Our Features</h2>
+            <p class="features-subtitle">Experience the best of Indian tourism with these advanced features.</p>
+            
+            <div class="features-slider-container">
+                <button class="slider-arrow prev-arrow" aria-label="Previous features">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                
+                <div class="features-slider">
+                    <!-- <div class="card">
+                        <img src="imageSection/aitravel.jpg"height=200 width=300 alt="AI Travel" class="feature-image">
+                        <h3>AI Travel Exploration</h3>
+                        <p>Get personalized travel plans tailored to your preferences with our AI-driven system.</p>
+                        <button class="feature-btn">Explore</button>
+                    </div>
+                     -->
+                    <div class="card" id="explore-events">
+                        <img src="imageSection/festival.jpg" height=200 width=300 alt="Events and Festivals" class="feature-image">
+                        <h3>Events and Festivals</h3>
+                        <p>Stay updated on India's vibrant cultural festivals and plan your trips accordingly.</p>
+                        <button class="feature-btn" ><a href="../EventPage/event.html">View Events</a></button>
+                    </div>
+                    
+                    <div class="card" id="virtual-view">
+                        <img src="imageSection/arvr.jpg"height=200 width=300 alt="AR/VR View" class="feature-image">
+                        <h3>AR/VR View</h3>
+                        <p>Experience destinations virtually before you visit with our immersive AR/VR technology.</p>
+                        <button class="feature-btn"><a href="../vr/vrviews.html">Try Now</a></button>
+                    </div>
+                    
+                    <div class="card" id="plan-a-trip">
+                        <img src="imageSection/aitravel.jpg" height=200 width=300 alt="Plan a Trip" class="feature-image">
+                        <h3>Plan a Trip</h3>
+                        <p>Create your perfect itinerary with our comprehensive trip planning tools.</p>
+                        <button class="feature-btn" id="plan-a-trip"><a href="../plan/plan.html">Start Planning</a></button>
+                    </div>
+                </div>
+                
+                <button class="slider-arrow next-arrow" aria-label="Next features">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="local-services-section" id="local-services">
+        <div class="section-container">
+            <h2 class="section-title">Local Services</h2>
+            <p class="section-subtitle">Connect with local service providers for a authentic and comfortable stay</p>
+            
+            <div class="slider-container">
+                <button class="slider-arrow prev-arrow" aria-label="Previous services">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                
+                <div class="slider local-services-slider">
+                    <div class="card">
+                        <img src="imageSection/localrooms.jpeg" height=200 width=300 alt="Local Rooms" class="card-image">
+                        <h3>Local Rooms</h3>
+                        <p>Stay with local families for an authentic experience</p>
+                        <button class="card-btn"><a href="../localServices/rooms/local-rooms.html">Find Rooms</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/carpooling.jpg" height=200 width=300 alt="CarPooling" class="card-image">
+                        <h3>CarPooling</h3>
+                        <p>Share rides with locals and fellow travelers</p>
+                        <button class="card-btn"><a href="../localServices/carpooling/index.html">Explore Rides</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/localGuide.jpg.jpg" height=200 width=300 alt="Local Guides" class="card-image">
+                        <h3>Local Guides</h3>
+                        <p>Explore hidden gems with knowledgeable local guides</p>
+                        <button class="card-btn"><a href="../localServices/guides/index.html">Hire Guides</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/food.jpg.jpg" height=200 width=300  alt="Local Cuisine" class="card-image">
+                        <h3>Local Cuisine</h3>
+                        <p>Taste authentic local dishes with home chefs</p>
+                        <button class="card-btn"><a href="../localServices/cuisine/index.html">Taste Better</a></button>
+                    </div>
+                </div>
+                
+                <button class="slider-arrow next-arrow" aria-label="Next services">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="government-schemes-section" id="government-schemes">
+        <div class="section-container">
+            <h2 class="section-title">Government Schemes</h2>
+            <p class="section-subtitle">Explore the latest government initiatives to promote tourism in India</p>
+            
+            <div class="slider-container">
+                <button class="slider-arrow prev-arrow" aria-label="Previous schemes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="slider government-schemes-slider">
+                    <div class="card">
+                        <img src="imageSection/swadesh.jpeg" height=200 width=300 alt="Swadesh Darshan" class="card-image">
+                        <h3>Swadesh Darshan</h3>
+                        <p>Integrated development of theme-based tourist circuits in the country</p>
+                        <button class="card-btn"><a href="GovernmentSchemes/SwadeshDarshan.html">Learn more</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/prashad.jpeg" height=200 width=300 alt="PRASHAD" class="card-image">
+                        <h3>PRASHAD</h3>
+                        <p>Pilgrimage Rejuvenation and Spiritual, Heritage Augmentation Drive</p>
+                        <button class="card-btn"><a href="GovernmentSchemes/PrashadScheme.html">Explore</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/dekho.jpg"height=200 width=300 alt="Dekho Apna Desh" class="card-image">
+                        <h3>Dekho Apna Desh</h3>
+                        <p>Initiative to encourage Indians to travel within the country</p>
+                        <button class="card-btn"><a href="GovernmentSchemes/DekhoApnaDeshScheme.html">Participate</a></button>
+                    </div>
+                    
+                    <div class="card">
+                        <img src="imageSection/adoptheritage.webp" height=200 width=300 alt="Adopt a Heritage" class="card-image">
+                        <h3>Adopt a Heritage</h3>
+                        <p>Collaborate in developing tourist amenities at heritage sites</p>
+                        <button class="card-btn"><a href="GovernmentSchemes/AdoptAHeritage.html">Get Involved</a></button>
+                    </div>
+                    <div class="card">
+                        <img src="imageSection/otherschemes.jpg" height=200 width=300 alt="Other Schemes" class="card-image">
+                        <h3>Other Schemes</h3>
+                        <p>Initiative to boost tourism and economy of India</p>
+                        <button class="card-btn"><a href="GovernmentSchemes/OtherScheme.html">Details</a></button>
+                    </div>
+                </div>
+                
+                <button class="slider-arrow next-arrow" aria-label="Next schemes">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="faq-section" id="faq">
+        <div class="section-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is ParyatanSetu?
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>ParyatanSetu is a comprehensive platform designed to connect tourists with local services, provide information about government schemes, and enhance the overall travel experience in India.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How can I book local services?
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can book local services by browsing through our Local Services section, selecting the service you're interested in, and following the booking instructions provided on the service page.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Are the government schemes applicable to foreign tourists?
+                        <svg class="faq-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most government schemes are primarily designed for domestic tourists. However, some initiatives may benefit international visitors as well. We recommend checking the specific details of each scheme for eligibility criteria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions or need assistance? We're here to help!</p>
+                    <ul>
+                        <li>Email: info@paryatansetu.com</li>
+                        <li>Phone: +91 1234567890</li>
+                        <li>Address: 123 Tourism Street, New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <section class="footer">
+            <span
+                >Created By InoGenius | &#169; 2024 All rights
+                reserved.</span
+            >
+            <div class="social">
+                <li>
+                    <a
+                        href="#"
+                        target="_blank"
+                        rel="noreferrer"
+                        ><i class="fa fa-globe"></i
+                    ></a>
+                    <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        ><i class="fa fa-github"></i
+                    ></a>
+                    <a
+                        href=""
+                        target="_blank"
+                        rel="noreferrer"
+                        ><i class="fa fa-linkedin-square"></i
+                    ></a>
+                </li>
+            </div>
+        </section>
+    </footer>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Cabs - Official Government Taxi Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- <div class="top-bar">
+        <div class="container">
+            <img src="https://www.india.gov.in/sites/upload_files/npi/files/india-gov-logo-small.png" alt="Government Logo" class="gov-logo">
+            <div class="gov-text">भारत सरकार | Government of India</div>
+            <div class="language-select">
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <header>
+        <nav>
+            <div class="logo">Bharat Cabs</div>
+            <ul>
+                <li><a href="#" class="active">Book Now</a></li>
+                <li><a href="#">My Rides</a></li>
+                <li><a href="#">Safety</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+    <div class="hero-section">
+        <h1>Safe & Reliable Cab Service</h1>
+        <p>Government Authorized | Verified Drivers | 24x7 Support</p>
+    </div>
+
+    <main>
+        <div class="booking-container">
+            <h1>Book Your Ride</h1>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="city"><i class="fas fa-city"></i> Select City</label>
+                    <select id="city" required>
+                        <option value="">Select your city</option>
+                        <option value="delhi">Delhi NCR</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="kolkata">Kolkata</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="pune">Pune</option>
+                        <option value="ahmedabad">Ahmedabad</option>
+                        <option value="jaipur">Jaipur</option>
+                        <option value="lucknow">Lucknow</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup"><i class="fas fa-map-marker-alt"></i> Pickup Location</label>
+                    <input type="text" id="pickup" required placeholder="Enter pickup location">
+                </div>
+
+                <div class="form-group">
+                    <label for="dropoff"><i class="fas fa-map-marker"></i> Drop-off Location</label>
+                    <input type="text" id="dropoff" required placeholder="Enter drop-off location">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date"><i class="fas fa-calendar"></i> Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time"><i class="fas fa-clock"></i> Time</label>
+                        <input type="time" id="time" required>
+                    </div>
+                </div>
+
+                <div class="cab-options">
+                    <h3>Select Cab Type</h3>
+                    <div class="cab-types">
+                        <div class="cab-type" data-price="12">
+                            <i class="fas fa-car"></i>
+                            <h4>Auto Rickshaw</h4>
+                            <p>₹12/km</p>
+                            <small>Budget-friendly</small>
+                        </div>
+                        <div class="cab-type" data-price="15">
+                            <i class="fas fa-car-side"></i>
+                            <h4>Hatchback</h4>
+                            <p>₹15/km</p>
+                            <small>4 seater</small>
+                        </div>
+                        <div class="cab-type" data-price="18">
+                            <i class="fas fa-car"></i>
+                            <h4>Sedan</h4>
+                            <p>₹18/km</p>
+                            <small>Premium comfort</small>
+                        </div>
+                        <div class="cab-type" data-price="22">
+                            <i class="fas fa-car-side"></i>
+                            <h4>SUV</h4>
+                            <p>₹22/km</p>
+                            <small>6-7 seater</small>
+                        </div>
+                        <div class="cab-type" data-price="35">
+                            <i class="fas fa-car-rear"></i>
+                            <h4>Luxury</h4>
+                            <p>₹35/km</p>
+                            <small>Premium service</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="promo-code">
+                    <label for="promo"><i class="fas fa-tag"></i> Promo Code</label>
+                    <div class="promo-input">
+                        <input type="text" id="promo" placeholder="Enter promo code">
+                        <button type="button" id="applyPromo">Apply</button>
+                    </div>
+                </div>
+
+                <div class="fare-estimate">
+                    <h3>Fare Details</h3>
+                    <div class="fare-breakdown">
+                        <p>Base Fare: <span id="baseFare">₹0.00</span></p>
+                        <p>Distance Charge: <span id="distanceCharge">₹0.00</span></p>
+                        <p>GST (5%): <span id="gst">₹0.00</span></p>
+                        <p>Discount: <span id="discount">-₹0.00</span></p>
+                        <hr>
+                        <p class="total">Total Fare: <span id="estimatedFare">₹0.00</span></p>
+                    </div>
+                </div>
+
+                <button type="submit" class="book-button">Book Now</button>
+            </form>
+        </div>
+
+        <div class="features-section">
+            <h2>Why Choose Bharat Cabs?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe & Secure</h3>
+                    <p>Government verified drivers</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h3>Best Rates</h3>
+                    <p>Government regulated fares</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>24x7 Service</h3>
+                    <p>Available round the clock</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-phone"></i>
+                    <h3>Support</h3>
+                    <p>Dedicated helpline</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Emergency Contact Bar -->
+    <div class="emergency-bar">
+        <div class="emergency-icon pulse">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="emergency-content">
+            <p>Emergency? Call Now:</p>
+            <a href="tel:112" class="emergency-number">112</a>
+            <button class="sos-button">SOS</button>
+        </div>
+    </div>
+
+    <!-- Live Tracking Modal -->
+    <div id="trackingModal" class="modal">
+        <div class="modal-content tracking-content">
+            <span class="close">&times;</span>
+            <h2>Live Tracking</h2>
+            <div class="tracking-info">
+                <div class="driver-info">
+                    <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Driver" class="driver-photo">
+                    <div class="driver-details">
+                        <h3>Your Driver</h3>
+                        <p>Rajesh Kumar</p>
+                        <p>DL: DL-1420110123456</p>
+                        <p>Vehicle: DL 01 AB 1234</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trip-progress">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="eta">ETA: <span id="etaTime">12 mins</span></div>
+                </div>
+                <div id="map" class="tracking-map">
+                    <!-- Map will be loaded here -->
+                </div>
+            </div>
+            <div class="tracking-actions">
+                <button class="action-button call-driver">
+                    <i class="fas fa-phone"></i> Call Driver
+                </button>
+                <button class="action-button share-ride">
+                    <i class="fas fa-share-alt"></i> Share Ride
+                </button>
+                <button class="action-button emergency">
+                    <i class="fas fa-exclamation-circle"></i> Emergency
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Bharat Cabs</h3>
+                <p>Government authorized cab service ensuring safe and reliable transportation across India.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Safety Guidelines</a></li>
+                    <li><a href="#">Driver Partnership</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> 24x7 Helpline: 1800-123-4567</p>
+                <p><i class="fas fa-envelope"></i> support@bharatcabs.gov.in</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bharat Cabs - Government of India Initiative</p>
+        </div>
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Booking Confirmation</h2>
+            <div id="bookingDetails"></div>
+            <div class="payment-options">
+                <h3>Select Payment Method</h3>
+                <div class="payment-methods">
+                    <label class="payment-method">
+                        <input type="radio" name="payment" value="upi" checked>
+                        <span class="method-icon"><i class="fas fa-mobile-alt"></i></span>
+                        <span>UPI</span>
+                    </label>
+                    <label class="payment-method">
+                        <input type="radio" name="payment" value="card">
+                        <span class="method-icon"><i class="fas fa-credit-card"></i></span>
+                        <span>Card</span>
+                    </label>
+                    <label class="payment-method">
+                        <input type="radio" name="payment" value="cash">
+                        <span class="method-icon"><i class="fas fa-money-bill-wave"></i></span>
+                        <span>Cash</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirmBooking" class="confirm-button">Confirm Booking</button>
+                <button id="cancelBooking" class="cancel-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <i class="fas fa-check-circle"></i>
+            <h2>Booking Successful!</h2>
+            <p>Your cab has been booked successfully.</p>
+            <p>Booking ID: <span id="bookingId"></span></p>
+            <button id="closeSuccess" class="confirm-button">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Hotel Booking Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- <header>
+        <div class="header-top">
+            <img src="images/emblem.png" alt="Indian Emblem" class="emblem">
+            <h1>Government Hotel Booking Portal</h1>
+            <div class="language-select">
+                <select>
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                </select>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
+    <main>
+        <section class="hero">
+            <h2>Welcome to Government Approved Hotels</h2>
+            <p>Experience comfort and luxury at government-approved rates</p>
+        </section>
+
+        <section class="booking-form" id="booking">
+            <h2>Book Your Stay</h2>
+            <form id="hotelBookingForm">
+                <div class="form-group">
+                    <label for="checkIn">Check-in Date:</label>
+                    <input type="date" id="checkIn" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkOut">Check-out Date:</label>
+                    <input type="date" id="checkOut" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomType">Room Type:</label>
+                    <select id="roomType" required>
+                        <option value="">Select Room Type</option>
+                        <option value="standard">Standard Room</option>
+                        <option value="deluxe">Deluxe Room</option>
+                        <option value="suite">Executive Suite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests:</label>
+                    <input type="number" id="guests" min="1" max="4" required>
+                </div>
+                <div class="form-group">
+                    <label for="govtId">Government ID:</label>
+                    <input type="text" id="govtId" placeholder="Aadhar/PAN/Passport" required>
+                </div>
+                <div class="form-group">
+                    <label for="promoCode">Promo Code:</label>
+                    <input type="text" id="promoCode" placeholder="Enter promo code if any">
+                </div>
+                <div class="price-details" id="priceDetails">
+                    <h3>Price Details</h3>
+                    <p>Base Price: <span id="basePrice">₹0</span></p>
+                    <p>Discount: <span id="discount">₹0</span></p>
+                    <p>Total Price: <span id="totalPrice">₹0</span></p>
+                </div>
+                <button type="submit">Book Now</button>
+            </form>
+        </section>
+
+        <section class="my-bookings" id="myBookings">
+            <h2>My Bookings</h2>
+            <div class="bookings-list">
+                <!-- Bookings will be added here dynamically -->
+            </div>
+        </section>
+
+        <section class="room-types">
+            <h2>Available Room Types</h2>
+            <div class="room-cards">
+                <div class="room-card">
+                    <img src="images/standard-room.jpg" alt="Standard Room">
+                    <h3>Standard Room</h3>
+                    <p>Starting from ₹2,000/night</p>
+                </div>
+                <div class="room-card">
+                    <img src="images/deluxe-room.jpg" alt="Deluxe Room">
+                    <h3>Deluxe Room</h3>
+                    <p>Starting from ₹3,500/night</p>
+                </div>
+                <div class="room-card">
+                    <img src="images/suite.jpg" alt="Executive Suite">
+                    <h3>Executive Suite</h3>
+                    <p>Starting from ₹5,000/night</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: support@govhotels.in</p>
+                <p>Phone: 1800-XXX-XXXX</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#terms">Terms & Conditions</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Government Hotel Booking Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3>Confirm Booking</h3>
+            <div class="booking-summary">
+                <!-- Summary will be added dynamically -->
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="confirm-btn" onclick="confirmBooking()">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>Booking Successful!</h3>
+            <p>Your booking has been confirmed. A confirmation email has been sent to your email address.</p>
+            <div class="modal-buttons">
+                <button class="confirm-btn" onclick="closeSuccessModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

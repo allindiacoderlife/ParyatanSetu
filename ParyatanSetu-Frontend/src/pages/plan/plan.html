@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParyatanSetu AI Trip Planner</title>
+    <link rel="stylesheet" href="plan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="planner-section">
+            <div class="welcome-card">
+                <div class="ai-avatar">
+                    <img src="../imageSection/plan trip.webp" alt="ParyatanSetu AI Bot" class="bot-image">
+                </div>
+                <h1>Welcome to ParyatanSetu!</h1>
+                <p>I'm your AI-powered Tourist Agent, ready to design your perfect travel experience. 🌍✨</p>
+            </div>
+
+            <div class="travel-form">
+                <h2>Let's Plan Your Trip</h2>
+                <form id="tripForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+                        <input type="text" id="destination" placeholder="Where would you like to go?">
+                    </div>
+
+                    <div class="form-group date-group">
+                        <div>
+                            <label><i class="fas fa-calendar"></i> Start Date</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div>
+                            <label><i class="fas fa-calendar"></i> End Date</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-wallet"></i> Budget Range</label>
+                        <select id="budget">
+                            <option value="">Select Budget Range</option>
+                            <option value="low">Budget Friendly</option>
+                            <option value="medium">Moderate</option>
+                            <option value="high">Luxury</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-rupee-sign"></i> Price Range</label>
+                        <div class="price-range-container">
+                            <div class="price-inputs">
+                                <input type="number" id="minPrice" placeholder="Min" min="0" max="100000">
+                                <span>to</span>
+                                <input type="number" id="maxPrice" placeholder="Max" min="0" max="100000">
+                            </div>
+                            <div class="range-slider">
+                                <input type="range" id="priceSlider" min="0" max="100000" step="1000" class="slider">
+                            </div>
+                            <div class="price-labels">
+                                <span>₹0</span>
+                                <span>₹50,000</span>
+                                <span>₹1,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-heart"></i> Travel Preferences</label>
+                        <div class="preference-chips">
+                            <label class="chip">
+                                <input type="checkbox" value="adventure"> Adventure
+                            </label>
+                            <label class="chip">
+                                <input type="checkbox" value="culture"> Culture
+                            </label>
+                            <label class="chip">
+                                <input type="checkbox" value="relaxation"> Relaxation
+                            </label>
+                            <label class="chip">
+                                <input type="checkbox" value="food"> Food
+                            </label>
+                            <label class="chip">
+                                <input type="checkbox" value="family"> Family
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-info-circle"></i> Special Requirements</label>
+                        <textarea id="requirements" placeholder="Any dietary restrictions, accessibility needs, or language preferences?"></textarea>
+                    </div>
+
+                    <button type="submit" class="plan-button">
+                        <i class="fas fa-magic"></i> Generate Travel Plan
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <h2>Your Personalized Travel Plan</h2>
+            <div class="results-container">
+                <div class="result-card itinerary">
+                    <h3><i class="fas fa-route"></i> Itinerary Overview</h3>
+                    <div id="itineraryContent"></div>
+                </div>
+
+                <div class="result-card accommodations">
+                    <h3><i class="fas fa-hotel"></i> Recommended Stays</h3>
+                    <div id="accommodationsContent"></div>
+                </div>
+
+                <div class="result-card activities">
+                    <h3><i class="fas fa-hiking"></i> Suggested Activities</h3>
+                    <div id="activitiesContent"></div>
+                </div>
+
+                <div class="result-card transportation">
+                    <h3><i class="fas fa-plane"></i> Transportation</h3>
+                    <div id="transportationContent"></div>
+                </div>
+
+                <div class="virtual-tour">
+                    <h3><i class="fas fa-vr-cardboard"></i> Virtual Tour Preview</h3>
+                    <div id="virtualTourContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="plan.js"></script>
+</body>
+</html>

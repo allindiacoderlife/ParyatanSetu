@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="booking-form">
+            <h2>Book Your Flight</h2>
+            <form id="flightBookingForm">
+                <div class="trip-type">
+                    <label>
+                        <input type="radio" name="tripType" value="roundTrip" checked> Round Trip
+                    </label>
+                    <label>
+                        <input type="radio" name="tripType" value="oneWay"> One Way
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-plane-departure"></i> From</label>
+                        <select id="departure" required>
+                            <option value="">Select Departure City</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-plane-arrival"></i> To</label>
+                        <select id="arrival" required>
+                            <option value="">Select Arrival City</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> Departure Date</label>
+                        <input type="date" id="departureDate" required>
+                    </div>
+                    <div class="form-group" id="returnDateGroup">
+                        <label><i class="fas fa-calendar-alt"></i> Return Date</label>
+                        <input type="date" id="returnDate">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> Passengers</label>
+                        <div class="passenger-selector">
+                            <div class="passenger-type">
+                                <span>Adults (12+ years)</span>
+                                <div class="number-input">
+                                    <button type="button" onclick="decreaseValue('adults')">-</button>
+                                    <input type="number" id="adults" value="1" min="1" max="9" readonly>
+                                    <button type="button" onclick="increaseValue('adults')">+</button>
+                                </div>
+                            </div>
+                            <div class="passenger-type">
+                                <span>Children (2-11 years)</span>
+                                <div class="number-input">
+                                    <button type="button" onclick="decreaseValue('children')">-</button>
+                                    <input type="number" id="children" value="0" min="0" max="9" readonly>
+                                    <button type="button" onclick="increaseValue('children')">+</button>
+                                </div>
+                            </div>
+                            <div class="passenger-type">
+                                <span>Infants (0-2 years)</span>
+                                <div class="number-input">
+                                    <button type="button" onclick="decreaseValue('infants')">-</button>
+                                    <input type="number" id="infants" value="0" min="0" max="9" readonly>
+                                    <button type="button" onclick="increaseValue('infants')">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-chair"></i> Class</label>
+                        <select id="cabinClass" required>
+                            <option value="economy">Economy</option>
+                            <option value="premiumEconomy">Premium Economy</option>
+                            <option value="business">Business</option>
+                            <option value="firstClass">First Class</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="search-btn">Search Flights</button>
+            </form>
+        </div>
+        <div class="flight-results" id="flightResults" style="display: none;">
+            <h2>Available Flights</h2>
+            <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="fare-filters">
+                <button class="fare-filter active" data-fare="regular">Regular Fare</button>
+                <button class="fare-filter" data-fare="flexi">Flexi Fare</button>
+                <button class="fare-filter" data-fare="corporate">Corporate</button>
+            </div>
+            <div class="flight-cards" id="flightCards">
+                <!-- Flight cards will be inserted here by JavaScript -->
+            </div>
+            <div class="fare-features">
+                <h3>Fare Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-suitcase"></i>
+                        <span>Cabin Baggage: 7 Kg</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-luggage-cart"></i>
+                        <span>Check-in Baggage: 15 Kg</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Date Change: ₹2500</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-times-circle"></i>
+                        <span>Cancellation: ₹3500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="seat-selection" id="seatSelection" style="display: none;">
+            <h2>Select Your Seats</h2>
+            <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="seat-map-container">
+                <div class="seat-map-legend">
+                    <div class="legend-item">
+                        <div class="seat available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat selected"></div>
+                        <span>Selected</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="seat occupied"></div>
+                        <span>Occupied</span>
+                    </div>
+                </div>
+                <div class="seat-map" id="seatMap">
+                    <!-- Seat map will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="selected-seats-info">
+                <p>Selected Seats: <span id="selectedSeatsText">None</span></p>
+                <p>Total Amount: ₹<span id="totalAmount">0</span></p>
+                <button class="proceed-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <div class="confirmation-popup" id="confirmationPopup">
+        <div class="popup-content">
+            <div class="success-animation">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Booking Confirmed!</h2>
+            <div class="booking-details">
+                <div class="ticket-header">
+                    <img src="" alt="" id="airlineLogo" class="airline-logo">
+                    <div class="pnr-number">PNR: <span id="pnrNumber"></span></div>
+                </div>
+                <div class="passenger-info">
+                    <h3>Passenger Details</h3>
+                    <div id="passengerList"></div>
+                </div>
+                <div class="flight-info">
+                    <div class="route-info">
+                        <div class="departure">
+                            <h4>From</h4>
+                            <p id="departureCity"></p>
+                            <p id="departureTime"></p>
+                            <p id="departureDate"></p>
+                        </div>
+                        <div class="flight-path">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="arrival">
+                            <h4>To</h4>
+                            <p id="arrivalCity"></p>
+                            <p id="arrivalTime"></p>
+                            <p id="arrivalDate"></p>
+                        </div>
+                    </div>
+                    <div class="ticket-details">
+                        <p>Flight: <span id="flightNumber"></span></p>
+                        <p>Class: <span id="cabinClass"></span></p>
+                        <p>Seat(s): <span id="seatNumbers"></span></p>
+                    </div>
+                    <div class="fare-summary">
+                        <h3>Fare Summary</h3>
+                        <div class="fare-details" id="fareSummary"></div>
+                        <div class="total-amount">
+                            Total Paid: ₹<span id="totalPaid"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button onclick="downloadTicket()" class="download-btn">
+                    <i class="fas fa-download"></i> Download Ticket
+                </button>
+                <button onclick="emailTicket()" class="email-btn">
+                    <i class="fas fa-envelope"></i> Email Ticket
+                </button>
+                <button onclick="closeConfirmation()" class="close-btn">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Events</title>
+    <link rel="stylesheet" href="event.css">
+    <style>
+        h1{
+            color:rgb(14, 33, 92);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Culutral &amp; Adventure Events</h1>
+    <div class="searchinnersection">
+        <div class="container">
+            <form id="searchForm" class="form-horizontal">
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Search For</label>
+                        <input type="text" name="events" placeholder="Name of events & festivals" class="form-text form-control">
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Location</label>
+                        <input name="location" placeholder="Enter a Location" class="form-text form-control" type="text">
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Keywords</label>
+                        <input placeholder="Keywords" name="keywords" class="form-text form-control" type="text">
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Event Start Date</label>
+                        <input type="date" name="from_date" class="form-date form-control">
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Event End Date</label>
+                        <input type="date" name="to_date" class="form-date form-control">
+                    </div>
+                    <div class="col d-flex">
+                        <label>
+                            <input type="radio" name="event_type" value="upcoming"> Upcoming Events
+                        </label>
+                        <label>
+                            <input type="radio" name="event_type" value="past"> Past Events
+                        </label>
+                        <label>
+                            <input type="radio" name="event_type" value="all"> All Events
+                        </label>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn-primary btn">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="events-list">
+            <h2>Event Results</h2>
+            <div id="eventResults"></div>
+        </div>
+    </div>
+    <script src="event.js"></script>
+</body>
+</html>
