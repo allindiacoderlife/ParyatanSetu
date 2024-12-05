@@ -1,49 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const userTypeBtns = document.querySelectorAll('.user-type-btn');
-    const form = document.querySelector('form');
-    const serviceProviderField = document.querySelector('.service-provider-field');
+document.addEventListener("DOMContentLoaded", () => {
+  const userTypeBtns = document.querySelectorAll(".user-type-btn");
+  const form = document.querySelector("form");
+  const serviceProviderField = document.querySelector(
+    ".service-provider-field"
+  );
 
-    let userType = 'visitor';
+  let userType = "visitor";
 
-    userTypeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            userTypeBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            userType = btn.dataset.type;
-            if (userType === 'service-provider' && serviceProviderField) {
-                serviceProviderField.classList.remove('hidden');
-            } else if (serviceProviderField) {
-                serviceProviderField.classList.add('hidden');
-            }
+  userTypeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      userTypeBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      userType = btn.dataset.type;
+      if (userType === "service-provider" && serviceProviderField) {
+        serviceProviderField.classList.remove("hidden");
+      } else if (serviceProviderField) {
+        serviceProviderField.classList.add("hidden");
+      }
+    });
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const user = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+
+    const userData = {
+      name: user,
+      email: email,
+      password: pass,
+    };
+
+    const handleRegister = (userType, data) => {
+      fetch(`http://192.168.83.252:5001/register/${userType}`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.status === "Ok") {
+            alert("Signup successful! Please log in.");
+            window.location.href = "login.html";
+          } else {
+            alert("Signup failed");
+          }
         });
-    });
+    };
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const user = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const pass = document.getElementById('password').value;
+    const handleLogin = (userType, data) => {
+      fetch(`http://192.168.83.252:5001/login/${userType}`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.status === "Ok") {
+            alert("Login successful!");
+            // window.location.href = "index.html";
+          } else {
+            alert("Login failed");
+          }
+        });
+    };
 
-        const data = {
-            user: user,
-            email: email,
-            password: pass,
+    if (form.id === "signup-form") {
+      console.log("Register");
+      if (userType === "service-provider") {
+        const type = document.getElementById("service-type").value;
+        const providerData = {
+          name: user,
+          email: email,
+          password: pass,
+          serviceType: type,
         };
-
-        if (userType === 'visitor') {
-            console.log("user", data);
-            fetch('http://192.168.83.252:5001/register', {
-                mode: 'cors',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                })
+        if (!type) {
+          alert("Please select a service type");
+          return;
         }
-    });
+        console.log("provider", providerData);
+        handleRegister("provider", providerData);
+      } else {
+        console.log("user");
+        handleRegister("user", userData);
+      }
+    } else {
+      console.log("Login");
+      if(userType === "service-provider") {
+        handleLogin("provider", userData);
+      } else {
+        handleLogin("user", userData);
+      }
+    }
+  });
 });
