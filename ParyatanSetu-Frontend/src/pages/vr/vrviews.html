@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Places Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Advanced Animation Styles */
+        .image-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .image-card img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            backface-visibility: hidden;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1) rotateY(5deg);
+        }
+
+        .overlay {
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        background-color 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .image-card:hover .overlay {
+            transform: translateY(0);
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Shine Effect */
+        .image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 100%
+            );
+            transform: skewX(-25deg);
+            transition: 0.75s;
+            z-index: 1;
+        }
+
+        .image-card:hover::before {
+            left: 125%;
+        }
+
+        /* Staggered entrance animation */
+        .gallery {
+            perspective: 2000px;
+        }
+
+        .image-card {
+            opacity: 0;
+            animation: cardEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(100px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        /* Search input animation */
+        .search-container input {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .search-container input:focus {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Pulse animation for hover state */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .image-card:hover {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Name Animation Styles */
+        .place-name {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .image-card {
+            position: relative;
+            margin-top: 40px; /* Make space for the name */
+        }
+
+        .image-card:hover .place-name {
+            opacity: 1;
+            top: -30px;
+            animation: glowText 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            from {
+                text-shadow: 0 0 5px #fff,
+                           0 0 10px #fff,
+                           0 0 15px #0073e6,
+                           0 0 20px #0073e6;
+            }
+            to {
+                text-shadow: 0 0 10px #fff,
+                           0 0 20px #fff,
+                           0 0 30px #0073e6,
+                           0 0 40px #0073e6;
+            }
+        }
+
+        /* 3D Text Effect */
+        .place-name::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            text-shadow: -2px -2px 0 #000;
+            animation: textWave 2s ease-in-out infinite;
+        }
+
+        @keyframes textWave {
+            0%, 100% {
+                clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+            }
+            50% {
+                clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+            }
+        }
+
+        /* Rainbow border effect */
+        .image-card::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            z-index: -1;
+            border-radius: 12px;
+            animation: glowingBorder 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-card:hover::after {
+            opacity: 1;
+        }
+
+        @keyframes glowingBorder {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: #333;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #1a237e, #0073e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .page-title p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .overlay {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .overlay p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        /* Enhanced hover effect for overlay */
+        .image-card:hover .overlay h3 {
+            animation: glowText 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .center-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            z-index: 2;
+            opacity: 0;
+            transition: all 0.5s ease;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #fff, #f5f5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 3s ease-in-out infinite;
+        }
+
+        .image-card:hover .center-name {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+            text-shadow: 
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 20px rgba(255,255,255,0.8),
+                0 0 30px rgba(255,255,255,0.8);
+            animation: 
+                textShine 3s ease-in-out infinite,
+                pulseText 2s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulseText {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Enhanced image card hover effect */
+        .image-card:hover img {
+            filter: brightness(0.7) blur(2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search your famous place...">
+        </div>
+        
+        <div class="page-title">
+            <h1>Virtual Tour of India</h1>
+            <p>Experience India's most beautiful destinations in 360° VR</p>
+        </div>
+        
+        <div class="gallery" id="gallery">
+            <div class="image-card" data-name="delhi">
+                <div class="place-name" data-text="Delhi">Delhi</div>
+                <img src="img/delhi.jpg" alt="Delhi">
+                <div class="overlay">
+                    <h3>Delhi</h3>
+                    <p>India's Capital City</p>
+                </div>
+                <h3>Delhi</h3>
+            </div>
+            
+            <div class="image-card" data-name="taj mahal">
+                <div class="place-name" data-text="Taj Mahal">Taj Mahal</div>
+                <img src="img/taj.jpg" alt="Taj Mahal">
+                <div class="overlay">
+                    <h3>Taj Mahal</h3>
+                    <p>Symbol of Eternal Love</p>
+                </div>
+                <h3>Taj Mahal</h3>
+            </div>
+            
+            <div class="image-card" data-name="mumbai">
+                <div class="place-name" data-text="Mumbai">Mumbai</div>
+                <img src="img/mumbai.jpg" alt="Mumbai">
+                <div class="overlay">
+                    <h3>Mumbai</h3>
+                    <p>Gateway of India</p>
+                </div>
+                <h3 >Mumbai</h3>
+            </div>
+            
+            <div class="image-card" data-name="kashmir">
+                <div class="place-name" data-text="Kashmir">Kashmir</div>
+                <img src="img/kashmir.jpg" alt="Kashmir">
+                <div class="overlay">
+                    <h3>Kashmir</h3>
+                    <p>Paradise on Earth</p>
+                </div>
+                <h3>Kashmir</h3>
+            </div>
+
+            <div class="image-card" data-name="jaipur">
+                <div class="place-name" data-text="Jaipur">Jaipur</div>
+                <img src="img/jaipur.jpg" alt="Jaipur">
+                <div class="overlay">
+                    <h3>Jaipur</h3>
+                    <p>The Pink City</p>
+                </div>
+                <h3>Jaipur</h3>
+            </div>
+
+            <div class="image-card" data-name="ladakh">
+                <div class="place-name" data-text="Ladakh">Ladakh</div>
+                <img src="img/ladakh.jpg" alt="Ladakh">
+                <div class="overlay">Ladakh</div>
+                <h3>Ladakh</h3>
+            </div>
+
+            <div class="image-card" data-name="goa">
+                <div class="place-name" data-text="Goa">Goa</div>
+                <img src="img/goa.jpg" alt="Goa">
+                <div class="overlay">Goa</div>
+                <h3>Goa</h3>
+            </div>
+
+            <div class="image-card" data-name="varanasi">
+                <div class="place-name" data-text="Varanasi">Varanasi</div>
+                <img src="img/varanasi.jpg" alt="Varanasi">
+                <div class="overlay">Varanasi</div>
+                <h3>Varanasi</h3>
+            </div>
+
+            <div class="image-card" data-name="darjeeling">
+                <div class="place-name" data-text="Darjeeling">Darjeeling</div>
+                <img src="img/darjeeling.jpg" alt="Darjeeling">
+                <div class="overlay">
+                    <h3>Darjeeling</h3>
+                    <p>Queen of Hills</p>
+                </div>
+                <h3>Darjeeling</h3>
+            </div>
+
+            <div class="image-card" data-name="amber">
+                <div class="place-name" data-text="amber">amber</div>
+                <img src="img/amber.jpg" alt="amber">
+                <div class="overlay">amber</div>
+                <h3>Amber</h3>
+            </div>
+
+            <div class="image-card" data-name="hampi">
+                <div class="place-name" data-text="Hampi">Hampi</div>
+                <img src="img/hampi.jpg" alt="Hampi">
+                <div class="overlay">
+                    <h3>Hampi</h3>
+                    <p>Ancient Vijayanagara Empire</p>
+                </div>
+                <h3>Hampi</h3>
+            </div>
+
+            <div class="image-card" data-name="goldentemple">
+                <div class="place-name" data-text="Golden Temple">Golden Temple</div>
+                <img src="img/golden.jpg" alt="Golden Temple">
+                <div class="overlay">
+                    <h3>Golden Temple</h3>
+                    <p>Spiritual Heart of Sikhism</p>
+                </div>
+                <h3>Golden Temple</h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Add staggered animation delay to cards
+        document.querySelectorAll('.image-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Add hover sound effect (optional)
+        const cards = document.querySelectorAll('.image-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const audio = new Audio('hover.mp3'); // Add a subtle hover sound
+                audio.volume = 0.1;
+                audio.play().catch(() => {}); // Catch and ignore autoplay restrictions
+            });
+        });
+    </script>
+</body>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+</script>
+</html> 
