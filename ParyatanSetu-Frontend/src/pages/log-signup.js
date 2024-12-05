@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(data);
           if (data.status === "Ok") {
             alert("Login successful!");
-            // window.location.href = "index.html";
+            window.location.href = "index.html";
           } else {
             alert("Login failed");
           }

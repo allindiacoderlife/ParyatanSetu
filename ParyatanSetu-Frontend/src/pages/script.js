@@ -226,13 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Contact form submission (for demonstration purposes)
-    const contactForm = document.querySelector('.contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message. We will get back to you soon!');
-        contactForm.reset();
-    });
+    
 
     // Intersection Observer for animations
     const animatedElements = document.querySelectorAll('.section-title, .faq-item, .contact-form, .contact-info');

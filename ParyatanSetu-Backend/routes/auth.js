@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Provider = require("../models/provider");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -89,5 +90,32 @@ router.post("/login/provider", async (req, res) => {
     return res.send({ status: "error", data: "Invalid password" });
   }
 });
+
+router.post("/send" , async (req , res) => {
+    const { email , message } = req.body;
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    });
+    let mailOptions = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: `Message from ${process.env.EMAIL}`,
+        text: message
+    };
+    transporter.sendMail(mailOptions , (err , data) => {
+        if(err){
+            console.log(err);
+            return res.send({ status: "error", data: err });
+        }else{
+            console.log('Email sent');
+            return res.send({ status: "Ok", data: "Email sent" });
+        }
+    });
+    res.send('Email sent');
+})
 
 module.exports = router;
