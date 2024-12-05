@@ -45,7 +45,7 @@ router.post("/register/provider", async (req, res) => {
       name: name,
       email: email,
       password: encyptedPassword,
-      type: type,
+      serviceType: serviceType,
     });
     res.send({ status: "Ok", data: "Provider created" });
     console.log("Provider created");
