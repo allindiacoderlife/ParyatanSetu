@@ -33,14 +33,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleRegister = (userType, data) => {
-      fetch(`http://192.168.83.252:5001/register/${userType}`, {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `https://paryatansetu.onrender.com/register/${userType}`,
+        // `http://192.168.83.252:5001/register/${userType}`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -54,14 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleLogin = (userType, data) => {
-      fetch(`http://192.168.83.252:5001/login/${userType}`, {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `https://paryatansetu.onrender.com/login/${userType}`,
+        // `http://192.168.83.252:5001/login/${userType}`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -96,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } else {
       console.log("Login");
-      if(userType === "service-provider") {
+      if (userType === "service-provider") {
         handleLogin("provider", userData);
       } else {
         handleLogin("user", userData);

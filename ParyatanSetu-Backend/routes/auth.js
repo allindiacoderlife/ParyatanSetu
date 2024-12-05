@@ -31,7 +31,7 @@ router.post("/register/user", async (req, res) => {
 });
 
 router.post("/register/provider", async (req, res) => {
-  const { name, email, password, type } = req.body;
+  const { name, email, password, serviceType } = req.body;
   const oldProvider = await Provider.findOne({ email: req.body.email });
   if (oldProvider) {
     return res.send({

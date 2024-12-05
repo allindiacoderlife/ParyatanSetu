@@ -15,14 +15,18 @@ contactForm.addEventListener("submit", (e) => {
 
   console.log(payload);
 
-  fetch("http://192.168.83.252:5001/send", {
-    mode: "cors",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  })
+  fetch(
+    "https://paryatansetu.onrender.com/send",
+      // "http://192.168.83.252:5001/send",
+    {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  )
     .then((res) => {
       console.log(res); // Log the raw response
       return res.text(); // Use text() to avoid JSON parsing errors
@@ -37,8 +41,7 @@ contactForm.addEventListener("submit", (e) => {
         } else {
           alert("Message failed to send");
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     })
     .catch((err) => {
       console.error("Fetch error:", err);
