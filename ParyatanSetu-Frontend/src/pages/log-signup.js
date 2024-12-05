@@ -18,38 +18,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
         e.preventDefault();
-        const username = document.getElementById('username').value;
+        const user = document.getElementById('username').value;
         const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const pass = document.getElementById('password').value;
 
-        if (form.id === 'signup-form') {
-            // Handle signup
-            if (userType === 'service-provider') {
-                const serviceType = document.getElementById('service-type').value;
-                if (!serviceType) {
-                    alert('Please select a service type');
-                    return;
-                }
-                localStorage.setItem('serviceType', serviceType);
-            }
-            localStorage.setItem('userName', username);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userType', userType);
-            alert('Signup successful! Please log in.');
-            window.location.href = 'login.html';
-        } else {
-            // Handle login
-            const storedUserName = localStorage.getItem('userName');
-            const storedUserEmail = localStorage.getItem('userEmail');
-            const storedUserType = localStorage.getItem('userType');
-            if (username === storedUserName && email === storedUserEmail && storedUserType === userType) {
-                alert('Login successful!');
-                window.location.href = 'index.html';
-            } else {
-                alert('Invalid credentials or user type');
-            }
+        const data = {
+            user: user,
+            email: email,
+            password: pass,
+        };
+
+        if (userType === 'visitor') {
+            console.log("user", data);
+            fetch('http://192.168.83.252:5001/register', {
+                mode: 'cors',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
         }
     });
 });
