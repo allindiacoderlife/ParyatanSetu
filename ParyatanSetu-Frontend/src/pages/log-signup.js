@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(data);
           if (data.status === "Ok") {
             alert("Login successful!");
+            localStorage.setItem("email", data.email);
             window.location.href = "index.html";
           } else {
             alert("Login failed");
