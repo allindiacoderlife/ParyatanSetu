@@ -126,5 +126,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize profile
-    fetchUserData();
+    // fetchUserData();
 });

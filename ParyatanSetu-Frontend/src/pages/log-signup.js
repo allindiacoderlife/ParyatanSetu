@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
       name: user,
       email: email,
       password: pass,
+      userType: userType,
+      accounts: [],
+      paymentHistory: [],
+      savedTrips: [],
+      bookings: [],
     };
 
     const handleRegister = (userType, data) => {
@@ -111,4 +116,29 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+
+  // fetchUserData
+
+  const fetchUserData = ({email}) => {
+    fetch(
+      `https://paryatansetu.onrender.com/user/${email}`, {
+        mode: "cors",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "Ok") {
+          populateUserData(data.userData);
+        } else {
+          alert("User not found");
+        }
+      });
+  }
 });
+
+

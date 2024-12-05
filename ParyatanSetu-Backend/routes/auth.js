@@ -10,7 +10,7 @@ const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/register/user", async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password , userType , accounts , paymentHistory , savedTrips , bookings } = req.body;
   const oldUser = await User.findOne({ email: req.body.email });
   if (oldUser) {
     return res.send({ status: "error", data: "user already exists" });
@@ -21,6 +21,11 @@ router.post("/register/user", async (req, res) => {
       name: name,
       email: email,
       password: encyptedPassword,
+      userType: userType,
+      accounts: accounts,
+      paymentHistory: paymentHistory,
+      savedTrips: savedTrips,
+      bookings: bookings,
     });
     res.send({ status: "Ok", data: "User created" });
     console.log("User created");
@@ -31,7 +36,7 @@ router.post("/register/user", async (req, res) => {
 });
 
 router.post("/register/provider", async (req, res) => {
-  const { name, email, password, serviceType } = req.body;
+  const { name, email, password, serviceType , userType , accounts , paymentHistory , savedTrips , bookings } = req.body;
   const oldProvider = await Provider.findOne({ email: req.body.email });
   if (oldProvider) {
     return res.send({
@@ -46,6 +51,11 @@ router.post("/register/provider", async (req, res) => {
       email: email,
       password: encyptedPassword,
       serviceType: serviceType,
+      userType: userType,
+      accounts: accounts,
+      paymentHistory: paymentHistory,
+      savedTrips: savedTrips,
+      bookings: bookings,
     });
     res.send({ status: "Ok", data: "Provider created" });
     console.log("Provider created");
@@ -91,31 +101,59 @@ router.post("/login/provider", async (req, res) => {
   }
 });
 
-router.post("/send" , async (req , res) => {
-    const { email , message } = req.body;
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        }
-    });
-    let mailOptions = {
-        from: process.env.EMAIL,
-        to: email,
-        subject: `Message from ${process.env.EMAIL}`,
-        text: message
-    };
-    transporter.sendMail(mailOptions , (err , data) => {
-        if(err){
-            console.log(err);
-            return res.send({ status: "error", data: err });
-        }else{
-            console.log('Email sent');
-            return res.send({ status: "Ok", data: "Email sent" });
-        }
-    });
-    res.send('Email sent');
-})
+router.post("/send", async (req, res) => {
+  const { email, message } = req.body;
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+  let mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: `Message from ${process.env.EMAIL}`,
+    text: message,
+  };
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.send({ status: "error", data: err });
+    } else {
+      console.log("Email sent");
+      return res.send({ status: "Ok", data: "Email sent" });
+    }
+  });
+  res.send("Email sent");
+});
+
+router.get("/user/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.send({ status: "error", data: "User not found" });
+    }
+    res.send({ status: "Ok", data: user });
+  } catch (err) {
+    res.send({ status: "error", data: err });
+    console.log(err);
+  }
+});
+
+router.get("/provider/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const provider = await Provider.findOne({ email: email });
+    if (!provider) {
+      return res.send({ status: "error", data: "Provider not found" });
+    }
+    res.send({ status: "Ok", data: provider });
+  } catch (err) {
+    res.send({ status: "error", data: err });
+    console.log(err);
+  }
+});
 
 module.exports = router;
