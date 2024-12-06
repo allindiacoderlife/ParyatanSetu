@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Service Provider Registration</h1>
+        <form id="serviceProviderForm">
+            <div class="section" id="serviceProviderDetails">
+                <h2>Service Provider Details</h2>
+                <div class="subsection">
+                    <h3>Personal Info</h3>
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    <input type="number" id="age" name="age" placeholder="Age" required min="18" max="100">
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="subsection">
+                    <h3>Residential Info</h3>
+                    <input type="text" id="address" name="address" placeholder="Address" required>
+                    <select id="state" name="state" required>
+                        <option value="">Select State</option>
+                    </select>
+                    <select id="city" name="city" required>
+                        <option value="">Select City</option>
+                    </select>
+                    <input type="text" id="pincode" name="pincode" placeholder="Pincode" required>
+                </div>
+                <div class="subsection">
+                    <h3>Contact Details</h3>
+                    <input type="tel" id="mobileNo" name="mobileNo" placeholder="Mobile No." required>
+                    <input type="tel" id="alternateNo" name="alternateNo" placeholder="Alternate No.">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="subsection">
+                    <h3>Upload Photo</h3>
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
+                    <p>Max size: 100MB</p>
+                </div>
+            </div>
+            <div class="section" id="serviceDetails">
+                <h2>Service Details</h2>
+                <select id="roomType" name="roomType" required>
+                    <option value="">Select Room Type</option>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="suite">Suite</option>
+                </select>
+                <input type="number" id="noOfRooms" name="noOfRooms" placeholder="No. of Rooms Available" required min="1">
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="acType" value="ac" required> AC
+                    </label>
+                    <label>
+                        <input type="radio" name="acType" value="nonAc" required> Non-AC
+                    </label>
+                </div>
+                <select id="floorPreference" name="floorPreference" required>
+                    <option value="">Select Floor Preference</option>
+                    <option value="ground">Ground Floor</option>
+                    <option value="first">1st Floor</option>
+                    <option value="second">2nd Floor</option>
+                    <option value="third">3rd Floor</option>
+                    <option value="fourth">4th Floor</option>
+                    <option value="fifth">5th Floor</option>
+                </select>
+                <input type="number" id="chargesPerHead" name="chargesPerHead" placeholder="Charges Per Head" required min="0" step="0.01">
+                <div class="range-slider">
+                    <label for="electricityAvailability">Electricity Availability (hours per day)</label>
+                    <input type="range" id="electricityAvailability" name="electricityAvailability" min="0" max="24" value="24">
+                    <span id="electricityValue">24 hours</span>
+                </div>
+                <div class="range-slider">
+                    <label for="waterAvailability">Water Availability (hours per day)</label>
+                    <input type="range" id="waterAvailability" name="waterAvailability" min="0" max="24" value="24">
+                    <span id="waterValue">24 hours</span>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
