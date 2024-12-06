@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="profile-header">
+            <div class="profile-info">
+                <div class="profile-image">
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture" id="profile-pic">
+                </div>
+                <div class="profile-text">
+                    <h1>John Doe</h1>
+                    <p>Service Provider</p>
+                </div>
+            </div>
+            <button class="settings-btn" onclick="toggleSettings()">
+                <a href="../settings.html"><i class="fas fa-cog"></i></a>
+            </button>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Total Services</h3>
+                <p>2</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Earnings</h3>
+                <p>$675</p>
+            </div>
+            <div class="stat-card">
+                <h3>Rating</h3>
+                <p>4.8 <i class="fas fa-star"></i></p>
+            </div>
+        </div>
+
+        <section class="personal-details">
+            <h2>Personal Information</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>First Name:</label>
+                    <p>John</p>
+                </div>
+                <div class="detail-item">
+                    <label>Last Name:</label>
+                    <p>Doe</p>
+                </div>
+                <div class="detail-item">
+                    <label>Age:</label>
+                    <p>32</p>
+                </div>
+                <div class="detail-item">
+                    <label>Gender:</label>
+                    <p>Male</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="residential-info">
+            <h2>Residential Information</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>Address:</label>
+                    <p>123 Main Street</p>
+                </div>
+                <div class="detail-item">
+                    <label>State:</label>
+                    <p>California</p>
+                </div>
+                <div class="detail-item">
+                    <label>City:</label>
+                    <p>Los Angeles</p>
+                </div>
+                <div class="detail-item">
+                    <label>Pincode:</label>
+                    <p>90001</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-details">
+            <h2>Contact Information</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>Mobile:</label>
+                    <p>+1 234-567-8900</p>
+                </div>
+                <div class="detail-item">
+                    <label>Alternate No:</label>
+                    <p>+1 234-567-8901</p>
+                </div>
+                <div class="detail-item">
+                    <label>Email:</label>
+                    <p>john.doe@example.com</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="services-payment-container">
+            <section class="my-services">
+                <h2>My Services</h2>
+                <div class="service-cards">
+                    <div class="service-card">
+                        <div class="service-details">
+                            <h3>Sedan</h3>
+                            <p>Reg No: KA01AB1234</p>
+                            <p>Capacity: 4 seats</p>
+                            <p>Year: 2022</p>
+                            <p>Rate: $50/day</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-details">
+                            <h3>SUV</h3>
+                            <p>Reg No: KA01CD5678</p>
+                            <p>Capacity: 7 seats</p>
+                            <p>Year: 2023</p>
+                            <p>Rate: $75/day</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="payment-history">
+                <h2>Payment History</h2>
+                <div class="payment-list">
+                    <div class="payment-item">
+                        <div class="payment-details">
+                            <p class="date">Dec 1, 2023</p>
+                            <p class="amount">$150</p>
+                            <p class="status">Completed</p>
+                        </div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-details">
+                            <p class="date">Nov 28, 2023</p>
+                            <p class="amount">$225</p>
+                            <p class="status">Completed</p>
+                        </div>
+                    </div>
+                    <div class="payment-item">
+                        <div class="payment-details">
+                            <p class="date">Nov 15, 2023</p>
+                            <p class="amount">$300</p>
+                            <p class="status">Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
