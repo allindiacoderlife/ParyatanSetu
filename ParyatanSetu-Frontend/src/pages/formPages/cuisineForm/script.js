@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const waterRange = document.getElementById('waterAvailability');
     const electricityValue = document.getElementById('electricityValue');
     const waterValue = document.getElementById('waterValue');
-
+    let base64String = '';
+    let foodItemsList = [];
+    let Featues = [];
     // Updated Indian states and cities data
     const indianStatesAndCities = {
         "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Rajahmundry", "Tirupati", "Kakinada", "Kadapa", "Anantapur", "Vizianagaram", "Eluru", "Ongole", "Nandyal", "Machilipatnam", "Adoni", "Tenali", "Proddatur", "Chittoor", "Hindupur", "Bhimavaram", "Madanapalle", "Guntakal", "Dharmavaram", "Gudivada", "Srikakulam", "Narasaraopet", "Tadipatri", "Tadepalligudem", "Chilakaluripet", "Yemmiganur", "Kadiri", "Chirala", "Anakapalle", "Kavali", "Palacole", "Sullurpeta", "Tanuku", "Gudur", "Mandapeta", "Macherla", "Bapatla", "Nagari", "Rayachoti", "Pithapuram", "Punganur", "Nidadavole", "Pileru", "Rajampet", "Kandukur", "Repalle"],
@@ -152,12 +154,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validate photo file size
     photoInput.addEventListener('change', function() {
         const file = this.files[0];
-        const maxSize = 100 * 1024 * 1024; // 100MB in bytes
-
-        if (file && file.size > maxSize) {
-            this.setCustomValidity('File size must not exceed 100MB.');
-        } else {
-            this.setCustomValidity('');
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+            base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+            console.log('Base64 String:', base64String);
+            // You can now use the base64String for further processing
+            };
+            reader.readAsDataURL(file);
         }
     });
 
@@ -182,14 +186,25 @@ document.addEventListener('DOMContentLoaded', function() {
     specializationSelect.addEventListener('change', updateFoodItems);
     foodTypeRadios.forEach(radio => radio.addEventListener('change', updateFoodItems));
 
-    // Update range slider values
-    electricityRange.addEventListener('input', function() {
-        electricityValue.textContent = this.value + ' hours';
+    // Handle amenities selection
+    const amenitiesCheckboxes = document.querySelectorAll('input[name="amenities"]');
+    amenitiesCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const selectedAmenities = Array.from(amenitiesCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            console.log('Selected Amenities:', selectedAmenities);
+            Featues = selectedAmenities;
+        });
     });
 
-    waterRange.addEventListener('input', function() {
-        waterValue.textContent = this.value + ' hours';
+    foodItemsContainer.addEventListener('change', function() {
+        const selectedFoodItems = Array.from(this.querySelectorAll('input[name="foodItems"]:checked'))
+            .map(checkbox => checkbox.value);
+        console.log('Selected Food Items:', selectedFoodItems);
+        foodItemsList = selectedFoodItems;
     });
+    
 
     // Form submission
     form.addEventListener('submit', function(e) {
@@ -207,10 +222,32 @@ document.addEventListener('DOMContentLoaded', function() {
             // If the form is valid, you can submit it or process the data
             console.log('Form submitted successfully!');
             // You can add your own logic here to send the form data to a server
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.photo = base64String;
+            data.amenities = Featues;
+            data.foodItems = foodItemsList;
+            console.log('Data:', data);
+            handleFormSubmit({data});
         } else {
             // If the form is invalid, show validation messages
             form.reportValidity();
         }
     });
+
+    const handleFormSubmit = ({data}) => {
+        fetch("http://192.168.31.252:5001/foodform" , {
+            mode: "cors",
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+    };
 });
 

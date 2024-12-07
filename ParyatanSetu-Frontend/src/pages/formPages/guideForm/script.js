@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const pincodeInput = document.getElementById('pincode');
     const photoInput = document.getElementById('photo');
     const languageCheckboxes = document.getElementById('languageCheckboxes');
-
+    let base64String = '';
+    let Language = [];
+    let Tour = [];
+    let days = [];
     // Updated Indian states and cities data
     const indianStatesAndCities = {
         "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Rajahmundry", "Tirupati", "Kakinada", "Kadapa", "Anantapur", "Vizianagaram", "Eluru", "Ongole", "Nandyal", "Machilipatnam", "Adoni", "Tenali", "Proddatur", "Chittoor", "Hindupur", "Bhimavaram", "Madanapalle", "Guntakal", "Dharmavaram", "Gudivada", "Srikakulam", "Narasaraopet", "Tadipatri", "Tadepalligudem", "Chilakaluripet", "Yemmiganur", "Kadiri", "Chirala", "Anakapalle", "Kavali", "Palacole", "Sullurpeta", "Tanuku", "Gudur", "Mandapeta", "Macherla", "Bapatla", "Nagari", "Rayachoti", "Pithapuram", "Punganur", "Nidadavole", "Pileru", "Rajampet", "Kandukur", "Repalle"],
@@ -97,15 +100,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validate photo file size
     photoInput.addEventListener('change', function() {
         const file = this.files[0];
-        const maxSize = 100 * 1024 * 1024; // 100MB in bytes
-
-        if (file && file.size > maxSize) {
-            this.setCustomValidity('File size must not exceed 100MB.');
-        } else {
-            this.setCustomValidity('');
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+            base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+            console.log('Base64 String:', base64String);
+            // You can now use the base64String for further processing
+            };
+            reader.readAsDataURL(file);
         }
     });
 
+    languageCheckboxes.addEventListener('change', function() {
+        const selectedLanguages = Array.from(this.querySelectorAll('input[name="languages"]:checked'))
+            .map(checkbox => checkbox.value);
+        console.log("Selected languages: ", selectedLanguages);
+        Language = selectedLanguages;
+    });
+
+    const tourTypeCheckboxes = document.getElementById('specialisedTours');
+    tourTypeCheckboxes.addEventListener('change', function() {
+        const selectedTourTypes = Array.from(this.querySelectorAll('input[name="tourType"]:checked'))
+            .map(checkbox => checkbox.value);
+        console.log("Selected tour types: ", selectedTourTypes);
+        Tour = selectedTourTypes;
+    });
+
+    const availabilityCheckboxes = document.getElementById('availabilityDays');
+    availabilityCheckboxes.addEventListener('change', function() {
+        const selectedAvailabilityDays = Array.from(this.querySelectorAll('input[name="availability"]:checked'))
+            .map(checkbox => checkbox.value);
+        console.log("Selected availability days: ", selectedAvailabilityDays);
+        days = selectedAvailabilityDays;
+    });
 
     // Form submission
     form.addEventListener('submit', function(e) {
@@ -137,10 +164,33 @@ document.addEventListener('DOMContentLoaded', function() {
             // If the form is valid, you can submit it or process the data
             console.log('Form submitted successfully!');
             // You can add your own logic here to send the form data to a server
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.languages = Language;
+            data.tourType = Tour;
+            data.availability = days;
+            data.photo = base64String;
+            console.log(data);
+            handleFormSubmit({data});
         } else {
             // If the form is invalid, show validation messages
             form.reportValidity();
         }
     });
+
+    const handleFormSubmit = ({data}) => {
+        fetch("http://192.168.31.252:5001/tourform" , {
+            mode: "cors",
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+    };
 });
 

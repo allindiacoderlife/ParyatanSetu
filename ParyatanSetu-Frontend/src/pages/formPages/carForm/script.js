@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const pincodeInput = document.getElementById('pincode');
     const photoInput = document.getElementById('photo');
     const pricePerHeadInput = document.getElementById('pricePerHead');
-
+    let base64String = '';
+    let days = [];
     // Indian states and cities data
     const indianStatesAndCities = {
         "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Kakinada", "Tirupati", "Rajahmundry", "Kadapa", "Anantapur"],
@@ -83,12 +84,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validate photo file size
     photoInput.addEventListener('change', function() {
         const file = this.files[0];
-        const maxSize = 100 * 1024 * 1024; // 100MB in bytes
-
-        if (file && file.size > maxSize) {
-            this.setCustomValidity('File size must not exceed 100MB.');
-        } else {
-            this.setCustomValidity('');
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+            base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+            console.log('Base64 String:', base64String);
+            // You can now use the base64String for further processing
+            };
+            reader.readAsDataURL(file);
         }
     });
 
@@ -109,12 +112,45 @@ document.addEventListener('DOMContentLoaded', function() {
         // Perform final validation
         if (form.checkValidity()) {
             // If the form is valid, you can submit it or process the data
-            console.log('Form submitted successfully!');
-            // You can add your own logic here to send the form data to a server
+            console.log('Form submitted successfully!');            
+            // Handle form submission
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.photo = base64String;
+            data.availability = days;
+            console.log('Data:', data);
+            handleFormSubmit({data});
         } else {
             // If the form is invalid, show validation messages
             form.reportValidity();
         }
     });
+
+    // Handle availability checkboxes
+    const availabilityCheckboxes = document.querySelectorAll('.days input[type="checkbox"]');
+    availabilityCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const selectedDays = Array.from(availabilityCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+            console.log('Selected Days:', selectedDays);
+            days = selectedDays;
+        });
+    });
+
+    const handleFormSubmit = ({data}) => {
+        fetch("http://192.168.31.252:5001/carform" , {
+            mode: "cors",
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+    };
 });
 
