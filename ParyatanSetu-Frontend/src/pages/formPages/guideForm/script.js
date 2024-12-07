@@ -179,7 +179,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const handleFormSubmit = ({data}) => {
-        fetch("http://192.168.31.252:5001/tourform" , {
+        fetch(
+            // "http://192.168.31.252:5001/tourform"
+            "https://paryatansetu.onrender.com/tourform"
+            , {
             mode: "cors",
             method: 'POST',
             headers: {

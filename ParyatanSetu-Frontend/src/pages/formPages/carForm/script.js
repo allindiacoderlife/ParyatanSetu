@@ -139,7 +139,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const handleFormSubmit = ({data}) => {
-        fetch("http://192.168.31.252:5001/carform" , {
+        fetch(
+            "https://paryatansetu.onrender.com/carform"
+            // "http://192.168.31.252:5001/carform"
+             , {
             mode: "cors",
             method: 'POST',
             headers: {

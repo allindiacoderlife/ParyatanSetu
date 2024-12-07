@@ -236,7 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const handleFormSubmit = ({data}) => {
-        fetch("http://192.168.31.252:5001/foodform" , {
+        fetch(
+            "https://paryatansetu.onrender.com/foodform"
+            // "http://192.168.31.252:5001/foodform"
+             , {
             mode: "cors",
             method: 'POST',
             headers: {

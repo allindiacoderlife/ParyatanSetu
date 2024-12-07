@@ -127,7 +127,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const handleFormSubmit = ({data}) => {
-        fetch("http://192.168.31.252:5001/roomform" , {
+        fetch(
+            "https://paryatansetu.onrender.com/roomform"
+            // "http://192.168.31.252:5001/roomform"
+             , {
             mode: "cors",
             method: 'POST',
             headers: {
