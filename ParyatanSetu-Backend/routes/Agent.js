@@ -14,6 +14,8 @@ let location = [];
 let formIds = "";
 let toIds = "";
 
+let output = "";
+
 const handleSearchFlightLoc = async (data) => {
   const options = {
     method: "GET",
@@ -67,11 +69,28 @@ const handleSearchFlight = async (FormId, ToId, StartData, EndDate) => {
 };
 
 router.post("/feed", async (req, res) => {
-  const { name } = req.query; // Access query parameters
-  if (name) {
+  const { name, uid } = req.query; // Access query parameters
+  const existingOutput = await Output.findOne({ uid });
+  if (existingOutput) {
+    await Output.updateOne({ uid }, { message: name });
     res.send(`${name}`);
   } else {
-    res.status(400).send("Name query parameter is missing.");
+    if (name) {
+      await Output.create({ message: name, uid: uid });
+      res.send(`${name}`);
+    } else {
+      res.status(400).send("Name query parameter is missing.");
+    }
+  }
+});
+
+router.get("/feed", async (req, res) => {
+  const { uid } = req.query; // Access query parameters
+  const existingOutput = await Output.findOne({ uid });
+  if (existingOutput) {
+    res.send(existingOutput.message);
+  } else {
+    res.status(404).send("Output not found.");
   }
 });
 

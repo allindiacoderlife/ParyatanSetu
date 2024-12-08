@@ -198,6 +198,7 @@ function displayResults(travelPlan) {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+  const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
   const fromId = document.getElementById("fromId").value;
   const toId = document.getElementById("toId").value;
   const startDate = document.getElementById("startDate").value;
@@ -209,6 +210,7 @@ form.addEventListener("submit", function (e) {
     document.querySelectorAll('.chip input[type="checkbox"]:checked')
   ).map((checkbox) => checkbox.value);
   const chat = document.getElementById("requirements").value;
+  const uid = "8923667469"
   const data = {
     fromId,
     toId,
@@ -218,6 +220,8 @@ form.addEventListener("submit", function (e) {
     minPrice,
     maxPrice,
     preferences,
+    sessionId,
+    uid,
     chat,
   };
 
