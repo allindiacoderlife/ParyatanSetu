@@ -1,101 +1,107 @@
-document.getElementById('tripForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    generateTravelPlan();
-});
+const form = document.getElementById("tripForm");
 
-document.addEventListener('DOMContentLoaded', function() {
-    const priceSlider = document.getElementById('priceSlider');
-    const minPrice = document.getElementById('minPrice');
-    const maxPrice = document.getElementById('maxPrice');
+document.addEventListener("DOMContentLoaded", function () {
+  const priceSlider = document.getElementById("priceSlider");
+  const minPrice = document.getElementById("minPrice");
+  const maxPrice = document.getElementById("maxPrice");
 
-    // Update input fields when slider changes
-    priceSlider.addEventListener('input', function() {
-        const value = parseInt(this.value);
-        minPrice.value = Math.max(0, value - 20000);
-        maxPrice.value = value;
-    });
+  // Update input fields when slider changes
+  priceSlider.addEventListener("input", function () {
+    const value = parseInt(this.value);
+    minPrice.value = Math.max(0, value - 20000);
+    maxPrice.value = value;
+  });
 
-    // Update slider when min price changes
-    minPrice.addEventListener('input', function() {
-        const min = parseInt(this.value) || 0;
-        const max = parseInt(maxPrice.value) || 100000;
-        if (min > max) {
-            this.value = max;
-        }
-        updateSlider();
-    });
-
-    // Update slider when max price changes
-    maxPrice.addEventListener('input', function() {
-        const min = parseInt(minPrice.value) || 0;
-        const max = parseInt(this.value) || 100000;
-        if (max < min) {
-            this.value = min;
-        }
-        updateSlider();
-    });
-
-    function updateSlider() {
-        const max = parseInt(maxPrice.value) || 100000;
-        priceSlider.value = max;
+  // Update slider when min price changes
+  minPrice.addEventListener("input", function () {
+    const min = parseInt(this.value) || 0;
+    const max = parseInt(maxPrice.value) || 100000;
+    if (min > max) {
+      this.value = max;
     }
+    updateSlider();
+  });
+
+  // Update slider when max price changes
+  maxPrice.addEventListener("input", function () {
+    const min = parseInt(minPrice.value) || 0;
+    const max = parseInt(this.value) || 100000;
+    if (max < min) {
+      this.value = min;
+    }
+    updateSlider();
+  });
+
+  function updateSlider() {
+    const max = parseInt(maxPrice.value) || 100000;
+    priceSlider.value = max;
+  }
 });
 
 function generateTravelPlan() {
-    // Get form values
-    const destination = document.getElementById('destination').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    const budget = document.getElementById('budget').value;
-    const requirements = document.getElementById('requirements').value;
-    const minPrice = document.getElementById('minPrice').value;
-    const maxPrice = document.getElementById('maxPrice').value;
-    
-    // Add price range to the preferences object
-    const priceRange = {
-        min: parseInt(minPrice) || 0,
-        max: parseInt(maxPrice) || 100000
-    };
+  // Get form values
+  const destination = document.getElementById("destination").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+  const budget = document.getElementById("budget").value;
+  const requirements = document.getElementById("requirements").value;
+  const minPrice = document.getElementById("minPrice").value;
+  const maxPrice = document.getElementById("maxPrice").value;
 
-    // Get selected preferences
-    const preferences = Array.from(document.querySelectorAll('.chip input[type="checkbox"]:checked'))
-        .map(checkbox => checkbox.value);
+  // Add price range to the preferences object
+  const priceRange = {
+    min: parseInt(minPrice) || 0,
+    max: parseInt(maxPrice) || 100000,
+  };
 
-    // Show loading state
-    showLoadingState();
+  // Get selected preferences
+  const preferences = Array.from(
+    document.querySelectorAll('.chip input[type="checkbox"]:checked')
+  ).map((checkbox) => checkbox.value);
 
-    // Simulate API call delay
-    setTimeout(() => {
-        // Generate mock travel plan with price range
-        const travelPlan = generateMockTravelPlan(
-            destination, 
-            startDate, 
-            endDate, 
-            budget, 
-            preferences,
-            priceRange
-        );
-        
-        // Display results
-        displayResults(travelPlan);
-    }, 2000);
+  // Show loading state
+  showLoadingState();
+
+  // Simulate API call delay
+  setTimeout(() => {
+    // Generate mock travel plan with price range
+    const travelPlan = generateMockTravelPlan(
+      destination,
+      startDate,
+      endDate,
+      budget,
+      preferences,
+      priceRange
+    );
+
+    // Display results
+    displayResults(travelPlan);
+  }, 2000);
 }
 
 function showLoadingState() {
-    document.getElementById('resultsSection').style.display = 'block';
-    const loadingHTML = '<div class="loading">Generating your perfect travel plan... <i class="fas fa-spinner fa-spin"></i></div>';
-    
-    document.getElementById('itineraryContent').innerHTML = loadingHTML;
-    document.getElementById('accommodationsContent').innerHTML = loadingHTML;
-    document.getElementById('activitiesContent').innerHTML = loadingHTML;
-    document.getElementById('transportationContent').innerHTML = loadingHTML;
-    document.getElementById('virtualTourContent').innerHTML = loadingHTML;
+  document.getElementById("resultsSection").style.display = "block";
+  const loadingHTML =
+    '<div class="loading">Generating your perfect travel plan... <i class="fas fa-spinner fa-spin"></i></div>';
+
+  document.getElementById("itineraryContent").innerHTML = loadingHTML;
+  document.getElementById("accommodationsContent").innerHTML = loadingHTML;
+  document.getElementById("activitiesContent").innerHTML = loadingHTML;
+  document.getElementById("transportationContent").innerHTML = loadingHTML;
+  document.getElementById("virtualTourContent").innerHTML = loadingHTML;
 }
 
-function generateMockTravelPlan(destination, startDate, endDate, budget, preferences, priceRange) {
-    // Mock data - replace with actual AI-generated content
-    return {
-        itinerary: `
+function generateMockTravelPlan(
+  destination,
+  startDate,
+  endDate,
+  budget,
+  preferences,
+  priceRange
+) {
+  // Mock data - replace with actual AI-generated content
+  return {
+    itinerary: `
             <div class="day-plan">
                 <h4>Day 1 - Welcome to ${destination}</h4>
                 <ul>
@@ -105,7 +111,7 @@ function generateMockTravelPlan(destination, startDate, endDate, budget, prefere
                 </ul>
             </div>
         `,
-        accommodations: `
+    accommodations: `
             <div class="accommodation-card">
                 <h4>Recommended Hotel</h4>
                 <p>⭐⭐⭐⭐</p>
@@ -114,17 +120,21 @@ function generateMockTravelPlan(destination, startDate, endDate, budget, prefere
                 <button class="view-details">View Details</button>
             </div>
         `,
-        activities: `
+    activities: `
             <div class="activities-list">
-                ${preferences.map(pref => `
+                ${preferences
+                  .map(
+                    (pref) => `
                     <div class="activity-item">
                         <i class="fas fa-check-circle"></i>
                         ${getActivityByPreference(pref)}
                     </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </div>
         `,
-        transportation: `
+    transportation: `
             <div class="transport-options">
                 <div class="transport-card">
                     <i class="fas fa-plane"></i>
@@ -139,7 +149,7 @@ function generateMockTravelPlan(destination, startDate, endDate, budget, prefere
                 </div>
             </div>
         `,
-        virtualTour: `
+    virtualTour: `
             <div class="virtual-tour-preview">
                 <div class="tour-card">
                     <img src="https://via.placeholder.com/400x200" alt="Virtual Tour Preview">
@@ -148,34 +158,66 @@ function generateMockTravelPlan(destination, startDate, endDate, budget, prefere
                     <button class="start-tour">Start Virtual Tour</button>
                 </div>
             </div>
-        `
-    };
+        `,
+  };
 }
 
 function getBudgetRange(budget) {
-    const ranges = {
-        'low': '$80-150/night',
-        'medium': '$150-300/night',
-        'high': '$300+/night'
-    };
-    return ranges[budget] || '$150-300/night';
+  const ranges = {
+    low: "$80-150/night",
+    medium: "$150-300/night",
+    high: "$300+/night",
+  };
+  return ranges[budget] || "$150-300/night";
 }
 
 function getActivityByPreference(preference) {
-    const activities = {
-        'adventure': 'Mountain hiking and zip-lining experience',
-        'culture': 'Historical sites and museum tours',
-        'relaxation': 'Spa day and beach relaxation',
-        'food': 'Local cuisine food tour',
-        'family': 'Family-friendly theme park visit'
-    };
-    return activities[preference] || 'Sightseeing tour';
+  const activities = {
+    adventure: "Mountain hiking and zip-lining experience",
+    culture: "Historical sites and museum tours",
+    relaxation: "Spa day and beach relaxation",
+    food: "Local cuisine food tour",
+    family: "Family-friendly theme park visit",
+  };
+  return activities[preference] || "Sightseeing tour";
 }
 
 function displayResults(travelPlan) {
-    document.getElementById('itineraryContent').innerHTML = travelPlan.itinerary;
-    document.getElementById('accommodationsContent').innerHTML = travelPlan.accommodations;
-    document.getElementById('activitiesContent').innerHTML = travelPlan.activities;
-    document.getElementById('transportationContent').innerHTML = travelPlan.transportation;
-    document.getElementById('virtualTourContent').innerHTML = travelPlan.virtualTour;
+  document.getElementById("itineraryContent").innerHTML = travelPlan.itinerary;
+  document.getElementById("accommodationsContent").innerHTML =
+    travelPlan.accommodations;
+  document.getElementById("activitiesContent").innerHTML =
+    travelPlan.activities;
+  document.getElementById("transportationContent").innerHTML =
+    travelPlan.transportation;
+  document.getElementById("virtualTourContent").innerHTML =
+    travelPlan.virtualTour;
 }
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const fromId = document.getElementById("fromId").value;
+  const toId = document.getElementById("toId").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+  const budget = document.getElementById("budget").value;
+  const minPrice = document.getElementById("minPrice").value;
+  const maxPrice = document.getElementById("maxPrice").value;
+  const preferences = Array.from(
+    document.querySelectorAll('.chip input[type="checkbox"]:checked')
+  ).map((checkbox) => checkbox.value);
+  const chat = document.getElementById("requirements").value;
+  const data = {
+    fromId,
+    toId,
+    startDate,
+    endDate,
+    budget,
+    minPrice,
+    maxPrice,
+    preferences,
+    chat,
+  };
+
+  console.log(data);
+});

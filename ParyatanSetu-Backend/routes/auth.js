@@ -112,7 +112,7 @@ router.post("/send", async (req, res) => {
   });
   let mailOptions = {
     from: process.env.EMAIL,
-    to: email,
+    to: process.env.EMAIL,
     subject: `Message from ${process.env.EMAIL}`,
     text: message,
   };
@@ -155,6 +155,33 @@ router.get("/provider/:email", async (req, res) => {
     res.send({ status: "error", data: err });
     console.log(err);
   }
+});
+
+router.post("/feedback" , async (req, res) => {
+  const { name , email , feedback } = req.body;
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+  let mailOptions = {
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: `Feedback from ${email} Name is ${name}`,
+    text: feedback,
+  };
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.send({ status: "error", data: err });
+    } else {
+      console.log("Email sent");
+      return res.send({ status: "Ok", data: "Email sent" });
+    }
+  });
+  res.send("Email sent");
 });
 
 module.exports = router;
