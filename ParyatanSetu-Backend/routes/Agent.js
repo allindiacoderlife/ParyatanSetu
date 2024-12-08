@@ -86,11 +86,14 @@ router.post("/feed", async (req, res) => {
 
 router.get("/feed", async (req, res) => {
   const { uid } = req.query; // Access query parameters
-  const existingOutput = await Output.findOne({ uid });
-  if (existingOutput) {
-    res.send(existingOutput.message);
-  } else {
-    res.status(404).send("Output not found.");
+  try {
+    const existingOutput = await Output.findOne({ uid });
+    if (existingOutput) {
+      res.send({ status: "Ok", data: existingOutput });
+    }
+  } catch (err) {
+    res.send({ status: "error", data: err });
+    console.log(err);
   }
 });
 

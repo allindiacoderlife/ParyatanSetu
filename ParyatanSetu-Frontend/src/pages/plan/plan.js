@@ -198,7 +198,7 @@ function displayResults(travelPlan) {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
+  const sessionId = "session_" + Math.random().toString(36).substr(2, 9);
   const fromId = document.getElementById("fromId").value;
   const toId = document.getElementById("toId").value;
   const startDate = document.getElementById("startDate").value;
@@ -210,7 +210,7 @@ form.addEventListener("submit", function (e) {
     document.querySelectorAll('.chip input[type="checkbox"]:checked')
   ).map((checkbox) => checkbox.value);
   const chat = document.getElementById("requirements").value;
-  const uid = "8923667469"
+  const uid = "8923667469";
   const data = {
     fromId,
     toId,
@@ -239,6 +239,35 @@ form.addEventListener("submit", function (e) {
     .then((data) => {
       console.log(data);
   })
-
+  setTimeout(() => {
+    handlefetch();
+  }, 2000);
 });
 
+const handlefetch = async () => {
+  const resultsSection = document.getElementById("resultsSection");
+  fetch("https://paryatansetu.onrender.com/feed?uid=8923667469", {
+    mode: "cors",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      return res.text(); // Log raw text to inspect response
+    })
+    .then((text) => {
+      console.log("Raw Response:", text);
+      // Try to parse as JSON if it looks like JSON
+      // const data = JSON.parse(text);
+      resultsSection.style.display = "block";
+      document.getElementById("result").textContent = text;
+      try {
+        // console.log(data.data.message);
+      } catch (err) {
+        // console.error("Error parsing JSON:", err);
+      }
+    });
+  // .catch((err) => console.error("Fetch Error:", err));
+};
