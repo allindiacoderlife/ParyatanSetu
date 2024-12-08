@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ParyatanSetu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar primary-navbar">
             <div class="navbar-container">
-                <a href="/" class="logo-container">
-                    <img src="imageSection/logo.jpg"height=40 width=40 alt="ParyatanSetu Logo" class="logo">
+                <a href="index.html" class="logo-container">
+                    <img src="../pages/imageSection/logo.jpg"height=40 width=40 alt="ParyatanSetu Logo" class="logo">
                     <span class="logo-text">ParyatanSetu</span>
                 </a>
                 <div class="nav-items">
+
+                    <div id="google_translate_element"></div>
+                    <script>
+                    function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                    }
+                    </script>
+                    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+                    </script>
+
                     <div class="search-container">
                         <input type="text" placeholder="Search tourism spots" class="search-input">
                         <button class="search-button" aria-label="Search">
@@ -37,12 +48,16 @@
                     <!-- <button class="login-button" aria-label="Login">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="user-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </button> -->
+
+                    <div><button id="themeToggle" arial-label="Toggle dark/light mode">☀︎</button>
+                    </div>
+
                     <div class="menu-container">
                         <button class="menu-button" aria-label="Menu">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon"><line x1="3" y1="17" x2="21" y2="17"></line><line x1="3" y1="10" x2="21" y2="10"></line><line x1="3" y1="23" x2="21" y2="23"></line></svg>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="#banner">Home</a></li>
                             <li><a href="#explore-events">Explore Events</a></li>
                             <li><a href="#government-schemes">Government Schemes</a></li>
                             <li><a href="#plan-a-trip">Plan a trip</a></li>
@@ -50,7 +65,7 @@
                             <li><a href="#virtual-view">Virtual view</a></li>
                             <li><a href="#contact">Contact</a></li>
                             <li><a href="#faq">Help</a></li>
-                            <li><a href="../feedback/feedback.html"  target="_main">Feedback</a></li>
+                            <li><a href="feedback/feedback.html"  target="_main">Feedback</a></li>
                         </ul>
                     </div>
                 </div>
@@ -94,7 +109,7 @@
             </nav>
         </nav>
     </header>
-    <main class="main-banner">
+    <main class="main-banner" id="banner">
         <video id="video-0" src="imageSection/India-360-v2.mp4" type="video/mp4" playsinline muted autoplay loop>
         </video>
         <!-- <div class="banner-slider">
@@ -107,6 +122,12 @@
             <h1 class="tagline" id="main-tagline">Discover the beauty of India!</h1>
             <div class="cursor"></div>
         </div>
+
+        <div class="play-btn opacity">
+            <i class="fa-solid fa-volume-high on hidden"></i>
+            <i class="fa-solid fa-volume-xmark off"></i>
+        </div>
+
         <div class="sub-tagline">
             <h5>Your Gateway to Incredible Experiences with ParyatanSetu</h5>
         </div>
@@ -123,13 +144,6 @@
                 </button>
                 
                 <div class="features-slider">
-                    <!-- <div class="card">
-                        <img src="imageSection/aitravel.jpg"height=200 width=300 alt="AI Travel" class="feature-image">
-                        <h3>AI Travel Exploration</h3>
-                        <p>Get personalized travel plans tailored to your preferences with our AI-driven system.</p>
-                        <button class="feature-btn">Explore</button>
-                    </div>
-                     -->
                     <div class="card" id="explore-events">
                         <img src="imageSection/festival.jpg" height=200 width=300 alt="Events and Festivals" class="feature-image">
                         <h3>Events and Festivals</h3>
@@ -158,6 +172,7 @@
             </div>
         </div>
     </section>
+    <div class="backimage"></div>
     <section class="local-services-section" id="local-services">
         <div class="section-container">
             <h2 class="section-title">Local Services</h2>
@@ -327,6 +342,65 @@
             </div>
         </div>
     </section>
+    
+    <footer class="other-footer">
+        <div class="other-footer-content">
+            <div class="other-footer-section">
+                <a href="index.html"><span class="logo-text">ParyatanSetu<br><br></span></a>
+                <div class="other-footer-social-section">
+                    <h3>Follow us</h3>
+                    <div class="other-footer-social-icons">
+                        <a href="#" class="other-footer-social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="other-footer-social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        </a>
+                        <a href="#" class="other-footer-social-icon" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="other-footer-social-icon" aria-label="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                        </a>
+                        <a href="#" class="other-footer-social-icon" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="other-footer-section">
+                <h3>Quick links</h3>
+                <ul class="other-footer-quick-links">
+                    <li><a href="#" class="other-footer-link">Discover our features</a></li>
+                    <li><a href="#" class="other-footer-link">GovernmentSchemes</a></li>
+                    <li><a href="#" class="other-footer-link">Festivals and Events</a></li>
+                    <li><a href="#" class="other-footer-link">Local Services</a></li>
+                    <li><a href="#" class="other-footer-link">FAQ's</a></li>
+                </ul>
+            </div>
+
+        
+
+            <div class="other-footer-section">
+                <h3>Scan to chat</h3>
+                <div class="other-footer-qr-code">
+                    <img src="/placeholder.svg?height=150&width=150" alt="QR Code" class="other-footer-qr-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="other-footer-bottom">
+            <div class="other-footer-links">
+                <a href="#" class="other-footer-bottom-link">Terms of Use</a>
+                <span class="other-footer-separator">|</span>
+                <a href="#" class="other-footer-bottom-link">Privacy Policy</a>
+                <span class="other-footer-separator">|</span>
+                <a href="#" class="other-footer-bottom-link">Contact Us</a>
+            </div>
+            <p class="other-footer-copyright">© Ministry of Tourism, Government of India.</p>
+        </div>
+    </footer>
     <footer>
         <section class="footer">
             <span
@@ -357,9 +431,31 @@
             </div>
         </section>
     </footer>
-
-    
     <script src="script.js"></script>
     <script src="main.js"></script>
 </body>
+
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  replace with KEY
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script> 
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
+    } else if (document.selection && document.selection.type != "Control") { 
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+$(document).ready(function (){ // when the document has completed loading
+   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
+      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
+         responsiveVoice.cancel(); // stop anything currently being spoken
+         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
+      }, 1);
+   });
+});
+</script>
+
 </html>

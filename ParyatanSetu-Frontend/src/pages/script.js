@@ -96,6 +96,81 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    //toggle-btn
+    const theme = document.querySelector('#themeToggle');
+    let mode = 'light';
+    theme.addEventListener('click',()=>{
+        let travelEle=document.getElementsByClassName('travel-option');
+        let movingCards=document.getElementsByClassName('card');
+        let formLabel = document.getElementsByTagName('label');
+        let p = document.querySelectorAll('p');
+        let h3 = document.querySelectorAll('h3');
+
+        if(mode=='light'){
+            console.log('dark');
+            theme.textContent = '☀️';
+            document.querySelector('.primary-navbar').style.background = 'rgba(1,1,1,0.5)';
+            document.querySelector('.secondary-navbar').style.background = 'rgba(1,1,1,0.5)';
+            for (let i=0;i<travelEle.length;i++){
+                travelEle[i].style.color = 'white';
+            }
+            document.querySelector('.logo-text').style.color = '#ffb703';
+            document.querySelector('.cursor').style.background = '#9dd9d2';
+            document.querySelector('.menu-icon').style.color = 'white';
+            document.querySelector('.user-icon').style.color = 'white';
+            document.querySelector('.play-btn').style.color = 'white';
+            document.querySelector('.sub-tagline').style.background = 'rgba(1,1,1,0.5)';
+            document.querySelector('.sub-tagline').style.color = '#ffffff';
+            document.querySelector('.tagline').style.color = '#9dd9d2';
+            for (let i=0;i<movingCards.length;i++){
+                movingCards[i].style.background = 'black';
+            }
+            document.querySelector('.contact-form').style.background = 'black';
+            for(let i=0;i<formLabel.length;i++){
+                formLabel[i].style.color= 'white';
+            }
+            for(let i=0;i<p.length;i++){
+                p[i].style.color= 'white';
+            }
+            for(let i=0;i<h3.length;i++){
+                h3[i].style.color= '#ff9100';
+            }
+
+            mode='dark';
+        }
+        else {
+            console.log('light');
+            theme.textContent = '☀︎';
+            document.querySelector('.primary-navbar').style.background = 'rgba(255, 149, 5, 0.5)';
+            document.querySelector('.secondary-navbar').style.background = 'rgba(255, 182, 39, 0.4)';
+            for (let i=0;i<travelEle.length;i++){
+                travelEle[i].style.color = '#333';
+            }
+            document.querySelector('.logo-text').style.color = '#2c3e50';
+            document.querySelector('.cursor').style.background = '#003566';
+            document.querySelector('.menu-icon').style.color = '#2c3e50';
+            document.querySelector('.user-icon').style.color = '#2c3e50';
+            document.querySelector('.play-btn').style.color = '#89aaf1';
+            document.querySelector('.sub-tagline').style.background = 'rgba(0, 128, 0, 0.2)';;
+            document.querySelector('.sub-tagline').style.color = '#89aaf1';
+            document.querySelector('.tagline').style.color = '#003566';
+            for (let i=0;i<movingCards.length;i++){
+                movingCards[i].style.background = '#cbf3f0';
+            }
+            document.querySelector('.contact-form').style.background = 'white';
+            for(let i=0;i<formLabel.length;i++){
+                formLabel[i].style.color= '#2c3e50';
+            }
+            for(let i=0;i<p.length;i++){
+                p[i].style.color= '#666';
+            }
+            for(let i=0;i<h3.length;i++){
+                h3[i].style.color= '#2c3e50';
+            }
+            mode='light';
+        }
+    });
+
     // Add hover effect for travel options
     const travelOptions = document.querySelectorAll('.travel-option');
     travelOptions.forEach(option => {
@@ -114,6 +189,31 @@ document.addEventListener('DOMContentLoaded', () => {
         bannerImages.forEach((image, index) => {
             image.style.transform = `translateY(${scrolled * 0.1 * (index + 1)}px)`;
         });
+    });
+
+    //play-btn
+    let vid = document.querySelector('#video-0');
+    let playBtn = document.querySelector('.play-btn');
+    let on = document.querySelector('.on');
+    let off = document.querySelector('.off');
+    
+    let state=1;
+    
+    playBtn.addEventListener('click',() =>{
+        if(state==0){
+            vid.muted = true;
+            playBtn.classList.add('opacity');
+            on.classList.add('hidden');
+            off.classList.remove('hidden');
+            state=1;
+        }
+        else {
+            vid.muted = false;
+            playBtn.classList.remove('opacity');
+            on.classList.remove('hidden');
+            off.classList.add('hidden');
+            state=0;
+        }
     });
     // Features slider functionality
 
@@ -326,5 +426,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     checkLoginStatus();
+
+    // Intersection Observer for animation on scroll
+    const footerSections = document.querySelectorAll('.other-footer-section');
+    
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px'
+    };
+
+    const observer2 = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer2.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    footerSections.forEach(section => {
+        observer2.observe(section);
+    });
+
+    // Parallax effect for footer background
+    window.addEventListener('scroll', () => {
+        const footer = document.querySelector('.other-footer');
+        const scrollPosition = window.pageYOffset;
+        footer.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+    });
+
+    // Add hover effect for social icons
+    const socialIcons = document.querySelectorAll('.other-footer-social-icon');
+    socialIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+            icon.style.transform = 'translateY(-3px) rotate(5deg)';
+        });
+        
+        icon.addEventListener('mouseleave', () => {
+            icon.style.transform = 'translateY(0) rotate(0)';
+        });
+    });
 
 });
