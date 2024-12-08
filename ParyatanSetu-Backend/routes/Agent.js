@@ -69,7 +69,7 @@ const handleSearchFlight = async (FormId, ToId, StartData, EndDate) => {
 router.post("/feed", async (req, res) => {
   const { name } = req.query; // Access query parameters
   if (name) {
-    res.send(`Hello, ${name}!`);
+    res.send(`${name}`);
   } else {
     res.status(400).send("Name query parameter is missing.");
   }
