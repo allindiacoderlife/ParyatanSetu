@@ -14,45 +14,6 @@ let location = [];
 let formIds = "";
 let toIds = "";
 
-router.post("/agent", async (req, res) => {
-  const {
-    formId,
-    toId,
-    startData,
-    endDate,
-    budget,
-    minPrice,
-    maxPrice,
-    preferences,
-    chat,
-  } = req.body;
-
-  handleSearchFlightLoc(formId);
-  formIds = location.data[0].id;
-  handleSearchFlightLoc(toId);
-  toIds = location.data[0].id;
-  handleSearchFlight(formIds, toIds, startData, endDate);
-
-  try {
-    await Flight.create({
-      formId: formIds,
-      toId: toIds,
-      startData: startData,
-      endDate: endDate,
-      budget: budget,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-      preferences: preferences,
-      chat: chat,
-    });
-    res.send({ status: "Ok", data: "Flight created" });
-    console.log("Flight created");
-  } catch (err) {
-    res.send({ status: "error", data: err });
-    console.log(err);
-  }
-});
-
 const handleSearchFlightLoc = async (data) => {
   const options = {
     method: "GET",
@@ -106,16 +67,11 @@ const handleSearchFlight = async (FormId, ToId, StartData, EndDate) => {
 };
 
 router.post("/feed", async (req, res) => {
-  const { message } = req.body;
-  try {
-    await Output.create({
-      message: message,
-    });
-    res.send({ status: "Ok", data: "message" });
-    console.log("Message received");
-  } catch (err) {
-    res.send({ status: "error", data: err });
-    console.log(err);
+  const { name } = req.query; // Access query parameters
+  if (name) {
+    res.send(`Hello, ${name}!`);
+  } else {
+    res.status(400).send("Name query parameter is missing.");
   }
 });
 

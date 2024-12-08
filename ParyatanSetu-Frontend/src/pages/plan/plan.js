@@ -164,9 +164,9 @@ function generateMockTravelPlan(
 
 function getBudgetRange(budget) {
   const ranges = {
-    low: "$80-150/night",
-    medium: "$150-300/night",
-    high: "$300+/night",
+    BEST: "$500-1000/night",
+    CHEAPEST: "$300-500/night",
+    FASTEST: "$150-300/night",
   };
   return ranges[budget] || "$150-300/night";
 }
@@ -194,6 +194,8 @@ function displayResults(travelPlan) {
     travelPlan.virtualTour;
 }
 
+// Handle form submission
+
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   const fromId = document.getElementById("fromId").value;
@@ -220,4 +222,19 @@ form.addEventListener("submit", function (e) {
   };
 
   console.log(data);
+
+  fetch("https://white827.app.n8n.cloud/webhook-test/web" , {
+    mode: "cors",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+  })
+
 });
+
