@@ -17,7 +17,7 @@ contactForm.addEventListener("submit", (e) => {
 
   fetch(
     "https://paryatansetu.onrender.com/send",
-      // "http://192.168.83.252:5001/send",
+    // "http://192.168.83.252:5001/send",
     {
       mode: "cors",
       method: "POST",
@@ -47,4 +47,31 @@ contactForm.addEventListener("submit", (e) => {
       console.error("Fetch error:", err);
     });
   // contactForm.reset();
+});
+
+const userInitial = userMenuButton.querySelector(".user-initial");
+const usersInitial = usersMenuButton.querySelector(".users-initial");
+const userMenuButton = document.querySelector('.user-menu-button');
+
+// User menu
+
+const fetchUser = async () => {
+  const email = localStorage.getItem("email");
+  if (email) {
+    userInitial.classList.remove("hidden");
+    usersInitial.classList.add("hidden");
+  } else {
+    userInitial.classList.add("hidden");
+    usersInitial.classList.remove("hidden");
+  }
+};
+
+fetchUser();
+
+userMenuButton.addEventListener("click", () => {
+  const email = localStorage.getItem("email");
+  if (email) {
+    fetchUser();
+    window.location.href = "src/pages/profilePages/visitor-profile.html";
+  }
 });

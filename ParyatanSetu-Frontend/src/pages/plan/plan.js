@@ -227,7 +227,7 @@ form.addEventListener("submit", function (e) {
 
   console.log(data);
 
-  fetch("https://white827.app.n8n.cloud/webhook-test/web" , {
+  fetch("https://white827.app.n8n.cloud/webhook/web" , {
     mode: "cors",
     method: "POST",
     headers: {
@@ -241,7 +241,7 @@ form.addEventListener("submit", function (e) {
   })
   setTimeout(() => {
     handlefetch();
-  }, 2000);
+  }, 20000);
 });
 
 const handlefetch = async () => {
@@ -253,21 +253,10 @@ const handlefetch = async () => {
       "Content-Type": "application/json",
     },
   })
-    .then((res) => {
-      console.log(res);
-      return res.text(); // Log raw text to inspect response
-    })
-    .then((text) => {
-      console.log("Raw Response:", text);
-      // Try to parse as JSON if it looks like JSON
-      // const data = JSON.parse(text);
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("User data:", data);
+      document.getElementById("result").textContent = data.data.message;
       resultsSection.style.display = "block";
-      document.getElementById("result").textContent = text;
-      try {
-        // console.log(data.data.message);
-      } catch (err) {
-        // console.error("Error parsing JSON:", err);
-      }
     });
-  // .catch((err) => console.error("Fetch Error:", err));
 };
