@@ -380,13 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    userMenuButton.addEventListener('click', () => {
-        if (isLoggedIn) {
-            userDropdown.classList.toggle('hidden');
-        } else {
-            window.location.href = 'login.html';
-        }
-    });
+    
 
     // Close dropdown when clicking outside
     document.addEventListener('click', (event) => {
@@ -467,5 +461,5 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.style.transform = 'translateY(0) rotate(0)';
         });
     });
-
+    
 });

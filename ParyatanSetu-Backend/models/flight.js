@@ -1,42 +1,16 @@
-const mongoos = require('mongoose');
+const mongoos = require("mongoose");
 
 const flightSchema = new mongoos.Schema({
-    formId: {
-        type: String,
-        required: true
-    },
-    toId: {
-        type: String,
-        required: true
-    },
-    startData: {
-        type: String,
-        required: true
-    },
-    endDate: {
-        type: String,
-        required: true
-    },
-    budget: {
-        type: String,
-        required: true
-    },
-    minPrice: {
-        type: String,
-        required: true
-    },
-    maxPrice: {
-        type: String,
-        required: true
-    },
-    preferences: {
-        type: String,
-        required: true
-    },
-    chat: {
-        type: String,
-        required: true
-    }
+  tripType: String,
+  departure: String,
+  arrival: String,
+  departureDate: String,
+  returnDate: String,
+  adults: String,
+  children: String,
+  infants: String,
+  cabinClass: String,
+  flights: Array,
 });
 
-module.exports = mongoos.model('Flight', flightSchema);
+module.exports = mongoos.model("Flight", flightSchema);

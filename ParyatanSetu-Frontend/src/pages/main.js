@@ -49,9 +49,9 @@ contactForm.addEventListener("submit", (e) => {
   // contactForm.reset();
 });
 
-const userInitial = userMenuButton.querySelector(".user-initial");
-const usersInitial = usersMenuButton.querySelector(".users-initial");
-const userMenuButton = document.querySelector('.user-menu-button');
+const userMenuButton = document.querySelector(".user-menu-button");
+const userInitial = document.querySelector(".user-initial");
+const usersInitial = document.querySelector(".users-initial");
 
 // User menu
 
@@ -71,7 +71,23 @@ fetchUser();
 userMenuButton.addEventListener("click", () => {
   const email = localStorage.getItem("email");
   if (email) {
-    fetchUser();
-    window.location.href = "src/pages/profilePages/visitor-profile.html";
+    // fetchUser();
+    window.location.href = "../pages/profilePages/visitor-profile.html";
+  } else {
+    window.location.href = "login.html";
   }
 });
+
+const fetchEmail = async () => {
+  const emails = "chiragsaxena728@gmail.com";
+  localStorage.setItem("email", emails);
+};
+
+// fetchEmail();
+
+const removeEmail = async () => {
+  localStorage.removeItem("email");
+};
+
+// removeEmail();
+

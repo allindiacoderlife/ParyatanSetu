@@ -3,6 +3,7 @@ const connectDB = require('./api/db');
 const auth = require('./routes/auth');
 const form = require('./routes/forms');
 const agent = require('./routes/Agent');
+const booking = require('./routes/booking');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -25,6 +26,7 @@ app.use(function(req, res, next) {
 app.use('/', auth);
 app.use('/', form);
 app.use('/', agent);
+app.use('/', booking);
 app.get('/', (req, res) => {
     res.send('Backend is running');
 });

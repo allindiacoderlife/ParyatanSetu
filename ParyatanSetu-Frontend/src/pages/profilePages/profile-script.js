@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fetchUserData() {
-    const email = localStorage.getItem("email");
-    // const email = "chiragsaxena728@gmail.com";
+    // const email = localStorage.getItem("email");
+    const email = "chiragsaxena728@gmail.com";
     fetch(`https://paryatansetu.onrender.com/user/${email}`, {
       method: "GET",
       headers: {
@@ -89,6 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error fetching user data:", error);
       });
   }
+
+  const fetchEmail = async () => {
+    const emails = "chiragsaxena728@gmail.com";
+    localStorage.setItem("email", emails);
+  };
+
+  // fetchEmail();
 
   function updateProfile(userData) {
     username.textContent = userData.username;
