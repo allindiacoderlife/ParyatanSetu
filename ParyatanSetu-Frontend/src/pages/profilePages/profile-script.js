@@ -63,8 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fetchUserData() {
-    // const email = localStorage.getItem("email");
-    const email = "chiragsaxena728@gmail.com";
+    const email = localStorage.getItem("email");
+    // const email = "chiragsaxena728@gmail.com";
+    console.log("Email:", email);
+    
     fetch(`https://paryatansetu.onrender.com/user/${email}`, {
       method: "GET",
       headers: {
