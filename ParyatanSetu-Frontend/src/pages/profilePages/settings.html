@@ -7,52 +7,41 @@
     <link rel="stylesheet" href="settings-styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html" class="logo">ParyatanSetu</a>
-            <a href="#" id="back-to-profile" class="back-link">Back to Profile</a>
-        </nav>
-    </header>
+    <div class="container">
+        <header>
+            <h1>ParyatanSetu</h1>
+            <a href="#" class="back-link">Back to Profile</a>
+        </header>
 
-    <main class="settings-container">
-        <h1>Settings</h1>
-        
-        <section class="settings-section">
-            <h2>Profile Visibility</h2>
-            <form id="visibility-form">
-                <label>
-                    <input type="checkbox" name="public-profile" id="public-profile">
-                    Make my profile public
-                </label>
-                <button type="submit">Save Visibility Settings</button>
-            </form>
-        </section>
+        <main>
+            <h2>Settings</h2>
 
-        <section class="settings-section">
-            <h2>Account Management</h2>
-            <button id="add-account" class="add-button">Add New Account</button>
-            <ul id="account-list">
-                <!-- Account list will be populated by JavaScript -->
-            </ul>
-        </section>
+            <!-- Profile Visibility Section -->
+            <section class="settings-section">
+                <h3>Profile Visibility</h3>
+                <div class="visibility-option">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="profileVisibility">
+                        <span class="checkmark"></span>
+                        Make my profile public
+                    </label>
+                </div>
+                <button class="save-btn" onclick="saveSettings()">Save Visibility Settings</button>
+            </section>
 
-        <section class="settings-section danger-zone">
-            <h2>Danger Zone</h2>
-            <button id="delete-account" class="delete-button">Delete Account</button>
-        </section>
-    </main>
+            <!-- Sign Out Section -->
+            <section class="settings-section">
+                <h3>Sign Out</h3>
+                <button class="signout-btn" onclick="handleSignOut()">Sign Out</button>
+            </section>
 
-    <div id="confirmation-modal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Confirm Account Deletion</h2>
-            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-            <div class="modal-actions">
-                <button id="confirm-delete" class="delete-button">Yes, Delete Account</button>
-                <button id="cancel-delete" class="cancel-button">Cancel</button>
-            </div>
-        </div>
+            <!-- Danger Zone -->
+            <section class="danger-zone">
+                <h3>Danger Zone</h3>
+                <button class="delete-btn" onclick="confirmDelete()">Delete Account</button>
+            </section>
+        </main>
     </div>
-
     <script src="settings-script.js"></script>
 </body>
-</html>
+</html> 
