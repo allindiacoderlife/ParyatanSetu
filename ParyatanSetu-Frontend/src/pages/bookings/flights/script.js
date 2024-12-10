@@ -103,7 +103,7 @@ document
     }
 
     // Send form data to the server
-    fetch("http://192.168.31.252:5001/flight", {
+    fetch("https://paryatansetu.onrender.com/flight", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ document
   });
 
 const handlePOST = async (formData) => {
-  fetch("http://192.168.31.252:5001/flight", {
+  fetch("https://paryatansetu.onrender.com/flight", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const handlePOST = async (formData) => {
 
 const handleGET = async (formData) => {
   fetch(
-    `http://192.168.31.252:5001/flight?departure=${formData.departure}&arrival=${formData.arrival}&departureDate=${formData.departureDate}&returnDate=${formData.returnDate}`,
+    `https://paryatansetu.onrender.com/flight?departure=${formData.departure}&arrival=${formData.arrival}&departureDate=${formData.departureDate}&returnDate=${formData.returnDate}`,
     {
       method: "GET",
       headers: {
