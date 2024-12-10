@@ -1,176 +1,137 @@
-:root {
-    --primary-color: #FF9933;
-    --secondary-color: #138808;
-    --accent-color: #000080;
-    --text-color: #333;
-    --background-color: #f4f4f4;
-}
-
-body, html {
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    box-sizing: border-box;
 }
 
-.navbar {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--accent-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.logo-container:hover {
-    transform: scale(1.05);
-}
-
-.logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.login-icon {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.login-icon:hover {
-    color: var(--secondary-color);
-}
-
-.main-section {
-    background-image: url('../../imageSection/carpooling.jpg');
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e');
     background-size: cover;
     background-position: center;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    position: relative;
-}
-
-.main-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.main-content {
-    position: relative;
-    z-index: 1;
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    padding: 20px;
 }
 
 .search-container {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
 }
 
-input[type="text"], input[type="date"] {
-    padding: 10px;
-    font-size: 1rem;
+input {
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
-}
-
-input[type="text"] {
-    width: 300px;
+    font-size: 16px;
+    outline: none;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: var(--primary-color);
-    color: #fff;
+    padding: 12px 25px;
+    background: #007bff;
     border: none;
     border-radius: 5px;
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
+    background: #0056b3;
 }
 
-.results-section {
-    padding: 40px 20px;
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.service-card p i {
+    width: 20px;
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.service-card p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.service-card .fa-map-marker-alt {
+    color: #dc3545;
+}
+
+.service-card .fa-phone {
+    color: #28a745;
+}
+
+.service-card .fa-star {
+    color: #ffc107;
+}
+
+.service-card .fa-tools {
+    color: #ffffff;
+}
+
+.loader-container {
     text-align: center;
-    background-color: #e6e6e6;
+    padding: 40px;
+    color: white;
 }
 
 .loader {
     border: 5px solid #f3f3f3;
-    border-top: 5px solid var(--primary-color);
     border-radius: 50%;
+    border-top: 5px solid #007bff;
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
-    margin: 20px auto;
-    display: none;
+    margin: 0 auto 20px auto;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.no-results {
-    font-size: 1.2rem;
-    color: var(--accent-color);
-    margin-top: 20px;
-    display: none;
-}
-
-.ashoka-chakra {
-    width: 100px;
-    height: 100px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: relative;
-    margin: 40px auto;
-    animation: rotate 20s linear infinite;
-}
-
-.ashoka-chakra::before {
-    content: '☸';
-    font-size: 60px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--primary-color);
-}
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+} 

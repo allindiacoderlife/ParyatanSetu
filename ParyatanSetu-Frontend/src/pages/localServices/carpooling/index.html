@@ -3,35 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carpooling - ParyatanSetu</title>
+    <title>Car Service Locator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- <nav class="navbar">
-        <a href="#" class="logo-container">
-            <img src="/placeholder.svg?height=40&width=40" alt="ParyatanSetu Logo" class="logo">
-            <span>ParyatanSetu</span>
-        </a>
-        <div class="login-icon">👤</div>
-    </nav> -->
-
-    <section class="main-section">
-        <div class="main-content">
-            <h1>Find Your Ride</h1>
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="Please enter a destination place" required>
-                <input type="date" id="date-input" required>
-                <button id="search-button">Search</button>
-            </div>
+    <div class="hero">
+        <div class="search-container">
+            <input type="text" id="location" placeholder="Enter your location" required>
+            <input type="date" id="service-date" required>
+            <button onclick="searchServices()">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-    </section>
-
-    <section class="results-section">
-        <div class="loader" id="loader"></div>
-        <div class="no-results" id="no-results">No data found</div>
-        <div class="ashoka-chakra"></div>
-    </section>
-
+        
+        <div id="results" class="results-container">
+            <!-- Service providers will be displayed here -->
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
