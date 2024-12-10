@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle form submission
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
+            data.city = data.city.toLowerCase();
             data.photo = base64String;
             data.availability = days;
             console.log('Data:', data);

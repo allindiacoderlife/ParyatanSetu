@@ -140,7 +140,6 @@ router.get("/user/:email", async (req, res) => {
     res.send({ status: "error", data: err });
     console.log(err);
   }
-  res.send('Hello World');
 });
 
 router.get("/provider/:email", async (req, res) => {

@@ -66,25 +66,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = localStorage.getItem("email");
     // const email = "chiragsaxena728@gmail.com";
     console.log("Email:", email);
-    
-    fetch(`https://paryatansetu.onrender.com/user/${email}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json", // Optional, but good practice
-      },
-    })
+
+    fetch(
+      // `https://paryatansetu.onrender.com/user/${email}`
+      `http://192.168.31.252:5001/user/${email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json", // Optional, but good practice
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("User data:", data);
         const userData = {
-            username: data.data.name,
-            userType: data.data.userType,
-            serviceType: data.data.serviceType,
-            accounts: data.data.accounts,
-            paymentHistory: data.data.paymentHistory,
-            savedTrips: data.data.savedTrips,
-            bookings: data.data.bookings,
-          };
+          username: data.data.name,
+          userType: data.data.userType,
+          serviceType: data.data.serviceType,
+          accounts: data.data.accounts,
+          paymentHistory: data.data.paymentHistory,
+          savedTrips: data.data.savedTrips,
+          bookings: data.data.bookings,
+        };
         updateProfile(userData);
       })
       .catch((error) => {
