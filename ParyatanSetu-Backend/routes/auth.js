@@ -10,7 +10,16 @@ const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/register/user", async (req, res) => {
-  const { name, email, password , userType , accounts , paymentHistory , savedTrips , bookings } = req.body;
+  const {
+    name,
+    email,
+    password,
+    userType,
+    accounts,
+    paymentHistory,
+    savedTrips,
+    bookings,
+  } = req.body;
   const oldUser = await User.findOne({ email: req.body.email });
   if (oldUser) {
     return res.send({ status: "error", data: "user already exists" });
@@ -36,7 +45,17 @@ router.post("/register/user", async (req, res) => {
 });
 
 router.post("/register/provider", async (req, res) => {
-  const { name, email, password, serviceType , userType , accounts , paymentHistory , savedTrips , bookings } = req.body;
+  const {
+    name,
+    email,
+    password,
+    serviceType,
+    userType,
+    accounts,
+    paymentHistory,
+    savedTrips,
+    bookings,
+  } = req.body;
   const oldProvider = await Provider.findOne({ email: req.body.email });
   if (oldProvider) {
     return res.send({
@@ -156,8 +175,8 @@ router.get("/provider/:email", async (req, res) => {
   }
 });
 
-router.post("/feedback" , async (req, res) => {
-  const { name , email , feedback } = req.body;
+router.post("/feedback", async (req, res) => {
+  const { name, email, feedback } = req.body;
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -181,6 +200,20 @@ router.post("/feedback" , async (req, res) => {
     }
   });
   res.send("Email sent");
+});
+
+router.delete("/delete/user/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await User.findOneAndDelete({ email: email });
+    if (!user) {
+      return res.send({ status: "error", data: "User not found" });
+    }
+    res.send({ status: "Ok", data: "User deleted" });
+  } catch (err) {
+    res.send({ status: "error", data: err });
+    console.log(err);
+  }
 });
 
 module.exports = router;
