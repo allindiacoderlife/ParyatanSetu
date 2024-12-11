@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhar Verification</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Aadhar Verification</h1>
+        <form id="aadharForm">
+            <label for="aadharId">Enter Aadhar ID:</label>
+            <input type="text" id="aadharId" name="aadharId" required pattern="\d{12}" maxlength="12">
+            <button type="submit">Verify</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
