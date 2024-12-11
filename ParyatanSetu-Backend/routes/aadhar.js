@@ -21,7 +21,7 @@ router.post("/aadhar", (req, res) => {
 
   const mailOptions = {
     from: process.env.EMAIL,
-    to: "chiragsaxena729@gmail.com",
+    to: "shivam.soni2022@glbajajgroup.org",
     subject: "OTP Verification",
     text: `Aadhar Number: ${aadharNumber} and OTP: ${otp}. It is valid for 10 minutes.`,
   };
