@@ -38,8 +38,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Specify the path to the folder containing index.html
-          path: '.ParyatanSetu-Frontend/src/pages/'
+          # Specify the exact path containing index.html
+          path: '.ParyatanSetu-Frontend/src/pages'
 
       - name: Deploy to GitHub Pages
         id: deployment
