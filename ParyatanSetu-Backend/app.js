@@ -5,6 +5,7 @@ const form = require('./routes/forms');
 const agent = require('./routes/Agent');
 const booking = require('./routes/booking');
 const localService = require('./routes/localService');
+const aadhar = require('./routes/aadhar');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -29,6 +30,7 @@ app.use('/', form);
 app.use('/', agent);
 app.use('/', booking);
 app.use('/', localService);
+app.use('/', aadhar);
 app.get('/', (req, res) => {
     res.send('Backend is running');
 });
