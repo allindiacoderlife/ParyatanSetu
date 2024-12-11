@@ -3,37 +3,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const otpForm = document.getElementById("otpForm");
   const popup = document.getElementById("popup");
   const closePopup = document.getElementById("closePopup");
-  let dataValue = {};
-  let aadharNo = "";
   if (aadharForm) {
     aadharForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const aadharId = document.getElementById("aadharId").value;
+      const otp = Math.floor(1000 + Math.random() * 9000);
       if (aadharId.length === 12 && /^\d+$/.test(aadharId)) {
         // window.location.href = 'otp.html';
         console.log("Aadhar ID:", aadharId);
-        aadharNo = aadharId;
-        fetch(
-          "https://132f13cf-0ea9-498f-8332-e875469ebeee.mock.pstmn.io/generate-otp",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ aadhaarNumber: aadharId }),
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            dataValue = data;
-            if (dataValue.status === "success") {
-              localStorage.setItem("aadharNo", aadharNo);
-              localStorage.setItem("otpReference", dataValue.otpReference);
-              console.log(dataValue);
-              window.location.href = "otp.html";
-            }
-            // { status: "success", message: "OTP generated successfully", otpReference: "ABC123" }
+        fetch("http://192.168.31.252:5001/aadhar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ aadharNumber: aadharId, otp: otp }),
+        })
+          .then((res) => {
+            localStorage.setItem("aadharId", aadharId);
+            localStorage.setItem("otp", otp);
+            console.log(res);
+            return res.text();
+          })
+          .then((rawData) => {
+            console.log("Raw response:", rawData);
+            window.location.href = "otp.html";
           });
+        setTimeout(() => {
+          localStorage.removeItem("otp");
+        });
       } else {
         alert("Please enter a valid 12-digit Aadhar ID.");
       }
@@ -68,32 +65,43 @@ document.addEventListener("DOMContentLoaded", () => {
         .join("");
       if (otp.length === 4 && /^\d+$/.test(otp)) {
         console.log("OTP:", otp);
-        let aadharNo = localStorage.getItem("aadharNo");
-        let otpReference = localStorage.getItem("otpReference");
-        const verify = {
-          aadhaarNumber: aadharNo,
-          otpReference: otpReference,
-          otp: otp,
-        };
-        console.log(verify);
-        fetch("https://132f13cf-0ea9-498f-8332-e875469ebeee.mock.pstmn.io", {
+        const storedOtp = localStorage.getItem("otp");
+        if (otp === storedOtp) {
+          localStorage.removeItem("otp");
+          localStorage.removeItem("aadharId");
+          popup.style.display = "block";
+        } else {
+          alert("Invalid OTP.");
+        }
+      } else {
+        alert("Please enter a valid 4-digit OTP.");
+      }
+    });
+
+    const resendButton = document.getElementById("resend");
+
+    resendButton.addEventListener("click", () => {
+      const aadharId = localStorage.getItem("aadharId");
+      if (aadharId) {
+        const newOtp = Math.floor(1000 + Math.random() * 9000);
+        fetch("http://192.168.31.252:5001/aadhar", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(verify),
+          body: JSON.stringify({ aadharNumber: aadharId, otp: newOtp }),
         })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "success") {
-              console.log(data);
-              localStorage.removeItem("aadharNo");
-              localStorage.removeItem("otpReference");
-              popup.style.display = "flex";
-            }
+          .then((res) => {
+            localStorage.setItem("otp", newOtp);
+            console.log(res);
+            return res.text();
+          })
+          .then((rawData) => {
+            console.log("Raw response:", rawData);
+            alert("A new OTP has been sent.");
           });
       } else {
-        alert("Please enter a valid 4-digit OTP.");
+        alert("Aadhar ID not found. Please start the process again.");
       }
     });
   }
