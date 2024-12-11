@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (aadharId.length === 12 && /^\d+$/.test(aadharId)) {
         // window.location.href = 'otp.html';
         console.log("Aadhar ID:", aadharId);
-        fetch("http://192.168.31.252:5001/aadhar", {
+        fetch("https://paryatansetu.onrender.com/aadhar", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const aadharId = localStorage.getItem("aadharId");
       if (aadharId) {
         const newOtp = Math.floor(1000 + Math.random() * 9000);
-        fetch("http://192.168.31.252:5001/aadhar", {
+        fetch("https://paryatansetu.onrender.com/aadhar", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
