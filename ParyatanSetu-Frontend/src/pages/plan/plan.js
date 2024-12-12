@@ -227,7 +227,7 @@ form.addEventListener("submit", function (e) {
 
   console.log(data);
 
-  fetch("https://white827.app.n8n.cloud/webhook/web" , {
+  fetch("https://yagniksharma.app.n8n.cloud/webhook/web" , {
     mode: "cors",
     method: "POST",
     headers: {
