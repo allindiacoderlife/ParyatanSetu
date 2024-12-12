@@ -393,6 +393,20 @@
                 <h3>Goa</h3>
             </div>
 
+            <div class="image-card" data-name="mahabodi">
+                <div class="place-name" data-text="Ladakh">mahabodi</div>
+                <img src="img/mahabodi.jpg" alt="mahabodi">
+                <div class="overlay">mahabodi</div>
+                <h3>mahabodi Temple</h3>
+            </div>
+
+            <div class="image-card" data-name="chandraprabha">
+                <div class="place-name" data-text="chandraprabha">Ladakh</div>
+                <img src="img/chandra.jpg" alt="chandraprabha">
+                <div class="overlay">chandraprabha</div>
+                <h3>chandraprabha</h3>
+            </div>
+
             <div class="image-card" data-name="varanasi">
                 <div class="place-name" data-text="Varanasi">Varanasi</div>
                 <img src="img/varanasi.jpg" alt="Varanasi">
@@ -426,6 +440,45 @@
                 </div>
                 <h3>Hampi</h3>
             </div>
+            <div class="image-card" data-name="agrafort">
+                <div class="place-name" data-text="agrafort">agrafort</div>
+                <img src="img/agrafort.jpg" alt="agrafort">
+                <div class="overlay">
+                    <h3>agrafort</h3>
+                    <p>Ancient Vijayanagara Empire</p>
+                </div>
+                <h3>agrafort</h3>
+            </div>
+            <div class="image-card" data-name="ajanta">
+                <div class="place-name" data-text="ajanta">ajanta</div>
+                <img src="img/ajanta.jpg" alt="ajanta">
+                <div class="overlay">
+                    <h3>ajanta</h3>
+                    <p>Ancient Vijayanagara Empire</p>
+                </div>
+                <h3>ajanta</h3>
+            </div>
+
+            <div class="image-card" data-name="aliyardam">
+                <div class="place-name" data-text="amber">aliyardam</div>
+                <img src="img/aliyar.jpg" alt="aliyardam">
+                <div class="overlay">aliyardam</div>
+                <h3>Aliyar Dam</h3>
+            </div>
+
+            <div class="image-card" data-name="golkondafort">
+                <div class="place-name" data-text="amber">golkondafort</div>
+                <img src="img/golkonda.jpg" alt="golkondafort">
+                <div class="overlay">golkondafort</div>
+                <h3>GolKonda Fort</h3>
+            </div>
+
+            <div class="image-card" data-name="excelconvention">
+                <div class="place-name" data-text="amber">excelconvention</div>
+                <img src="img/excelconvention.jpg" alt="excelconvention">
+                <div class="overlay">excelconvention</div>
+                <h3>excelconvention</h3>
+            </div>
 
             <div class="image-card" data-name="goldentemple">
                 <div class="place-name" data-text="Golden Temple">Golden Temple</div>
@@ -457,26 +510,4 @@
         });
     </script>
 </body>
-<script src="https://code.responsivevoice.org/responsivevoice.js?key=6AqfGK6s"></script>  <!-- replace with KEY-->
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script> 
-function getSelectionText() {
-    var text = "";
-    if (window.getSelection) {
-        text = window.getSelection().toString();
-    // for Internet Explorer 8 and below. For Blogger, you should use &amp;&amp; instead of &&.
-    } else if (document.selection && document.selection.type != "Control") { 
-        text = document.selection.createRange().text;
-    }
-    return text;
-}
-$(document).ready(function (){ // when the document has completed loading
-   $(document).mouseup(function (e){ // attach the mouseup event for all div and pre tags
-      setTimeout(function() { // When clicking on a highlighted area, the value stays highlighted until after the mouseup event, and would therefore stil be captured by getSelection. This micro-timeout solves the issue. 
-         responsiveVoice.cancel(); // stop anything currently being spoken
-         responsiveVoice.speak(getSelectionText()); //speak the text as returned by getSelectionText
-      }, 1);
-   });
-});
-</script>
 </html> 

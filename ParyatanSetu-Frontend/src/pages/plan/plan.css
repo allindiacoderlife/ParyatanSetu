@@ -29,13 +29,17 @@ body {
     margin: 0 auto;
     padding: 20px;
     min-height: 100vh;
+    background-image: url("../imageSection/plantripback.png");
+   background-size: cover;
 }
 
 .welcome-card {
     text-align: center;
-    background: var(--gradient-primary);
+    background-image: url("../imageSection/plantrippage.png");
+    background-size: cover;
     color: white;
     padding: 20px;
+    height:250px;
     border-radius: 15px;
     box-shadow: 0 8px 20px var(--shadow-color);
     margin-bottom: 20px;
@@ -49,6 +53,7 @@ body {
 
 .welcome-card p {
     font-size: clamp(14px, 2vw, 16px);
+    margin: 235px 0;
 }
 
 .ai-avatar {
