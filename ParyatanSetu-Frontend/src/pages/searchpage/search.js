@@ -222,4 +222,88 @@ document.addEventListener('DOMContentLoaded', () => {
             suggestionsContainer.style.display = 'none';
         }
     });
+
+    // Voice Search Implementation
+    const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+    let isListening = false;
+
+    // Check if browser supports speech recognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = function() {
+            voiceSearchBtn.classList.add('listening');
+            searchInput.placeholder = "Listening...";
+            isListening = true;
+        };
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            searchInput.value = transcript;
+            performSearch(transcript);
+            showSuggestions(transcript);
+        };
+
+        recognition.onend = function() {
+            voiceSearchBtn.classList.remove('listening');
+            searchInput.placeholder = "Search for services, destinations, or guides...";
+            isListening = false;
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            voiceSearchBtn.classList.remove('listening');
+            searchInput.placeholder = "Search for services, destinations, or guides...";
+            isListening = false;
+        };
+
+        voiceSearchBtn.addEventListener('click', () => {
+            if (!isListening) {
+                recognition.start();
+            } else {
+                recognition.stop();
+            }
+        });
+    } else {
+        voiceSearchBtn.style.display = 'none';
+        console.log('Speech recognition not supported');
+    }
+
+    // Function to perform search (update your existing function or add this if it doesn't exist)
+    function performSearch(query) {
+        const results = websiteData.filter(item =>
+            item.title.toLowerCase().includes(query.toLowerCase()) ||
+            item.description.toLowerCase().includes(query.toLowerCase()) ||
+            item.category.toLowerCase().includes(query.toLowerCase())
+        );
+
+        searchResults.innerHTML = '';
+        suggestionsContainer.style.display = 'none';
+
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">No results found</div>';
+            return;
+        }
+
+        results.forEach(result => {
+            const resultCard = document.createElement('div');
+            resultCard.className = 'result-card';
+            resultCard.innerHTML = `
+                <img src="${result.image}" alt="${result.title}" class="result-image">
+                <div class="result-content">
+                    <h3 class="result-title">${result.title}</h3>
+                    <p class="result-description">${result.description}</p>
+                    <span class="result-category">${result.category}</span>
+                </div>
+            `;
+            resultCard.addEventListener('click', () => {
+                window.location.href = result.url;
+            });
+            searchResults.appendChild(resultCard);
+        });
+    }
 });
