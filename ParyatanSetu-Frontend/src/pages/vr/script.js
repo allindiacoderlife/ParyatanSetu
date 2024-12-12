@@ -65,6 +65,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 case 'amber':
                     window.location.href = 'vrviews/amber.html';
                     break;
+                    case 'agrafort':
+                    window.location.href = 'vrviews/agrafort.html';
+                    break;
+                    case 'ajanta':
+                    window.location.href = 'vrviews/ajanta.html';
+                    break;
+                    case 'mahabodi':
+                    window.location.href = 'vrviews/mahabodi.html';
+                    break;
+                    case 'aliyardam':
+                    window.location.href = 'vrviews/aliyardam.html';
+                    break;
+                    case 'golkondafort':
+                        window.location.href = 'vrviews/golkondafort.html';
+                        break;
+                    case 'chandraprabha':
+                        window.location.href = 'vrviews/chandraprabha.html';
+                        break;
+                        case 'excelconvention':
+                        window.location.href = 'vrviews/excelconvention.html';
+                        break;
             }
         });
     });
