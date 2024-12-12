@@ -224,7 +224,7 @@ function handleSearch() {
   const date = dateInput.value;
   console.log(searchTerm);
 
-  fetch(`http://192.168.31.252:5001/form/cuisine?city=${searchTerm}`, {
+  fetch(`https://paryatansetu.onrender.com/form/cuisine?city=${searchTerm}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

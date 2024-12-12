@@ -476,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(destination, selectedDate);
 
     fetch(
-      `http://192.168.31.252:5001/form/guide?city=${destination}&date=${selectedDate}`,
+      `https://paryatansetu.onrender.com/form/guide?city=${destination}&date=${selectedDate}`,
       {
         method: "GET",
         headers: {
