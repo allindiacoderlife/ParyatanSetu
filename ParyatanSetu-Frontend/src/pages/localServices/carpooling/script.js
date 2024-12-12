@@ -130,15 +130,6 @@ function searchServices() {
     .then((response) => response.json())
     .then((data) => {
       console.log("User data:", data);
-      //   const providers = [
-      //     {
-      //       name: data.data[0].firstName + " " + data.data[0].lastName,
-      //       contact: data.data[0].mobileNo + " , " + data.data[0].email,
-      //       location: data.data[0].city,
-      //       specialization: data.data[0].model,
-      //       address: data.data[0].address,
-      //     },
-      //   ];
       const providers = data.data.map((provider) => ({
         name: provider.firstName + " " + provider.lastName,
         contact: provider.mobileNo + " , " + provider.email,
