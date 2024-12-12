@@ -7,21 +7,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- <nav class="navbar">
-        <a href="#" class="logo-container">
-            <img src="/placeholder.svg?height=40&width=40" alt="ParyatanSetu Logo" class="logo">
-            <span>ParyatanSetu</span>
-        </a>
-        <div class="login-icon">👤</div>
-    </nav> -->
-
     <section class="main-section">
         <div class="main-content">
             <h1>Local Rooms</h1>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Please enter a destination place" required>
+                <div class="city-input-container">
+                    <input type="text" list="cities-list" id="city-input" placeholder="Select or enter a city" autocomplete="off">
+                    <datalist id="cities-list">
+                        <option value="Agra">
+                        <option value="Ahmedabad">
+                        <option value="Bangalore">
+                        <option value="Chennai">
+                        <option value="Delhi">
+                        <option value="Hyderabad">
+                        <option value="Jaipur">
+                        <option value="Kolkata">
+                        <option value="Mumbai">
+                        <option value="Pune">
+                        <option value="Varanasi">
+                        <option value="Udaipur">
+                        <option value="Kochi">
+                        <option value="Amritsar">
+                        <option value="Goa">
+                    </datalist>
+                </div>
                 <input type="date" id="date-input" required>
-                <button id="search-button">Search</button>
+                <button id="search-button" onclick="searchRooms()">Search</button>
             </div>
         </div>
     </section>
@@ -29,9 +40,297 @@
     <section class="results-section">
         <div class="loader" id="loader"></div>
         <div class="no-results" id="no-results">No data found</div>
+        <div id="rooms-container" class="rooms-container"></div>
         <div class="ashoka-chakra"></div>
     </section>
 
-    <script src="script.js"></script>
+    <script>
+        const dummyRoomData = {
+            agra: generateCityData("Agra", 800, 1500, 2500),
+            ahmedabad: generateCityData("Ahmedabad", 700, 1400, 2200),
+            bangalore: generateCityData("Bangalore", 900, 1600, 2800),
+            chennai: generateCityData("Chennai", 800, 1500, 2600),
+            delhi: generateCityData("Delhi", 900, 1700, 2900),
+            hyderabad: generateCityData("Hyderabad", 800, 1500, 2500),
+            jaipur: generateCityData("Jaipur", 700, 1300, 2200),
+            kolkata: generateCityData("Kolkata", 800, 1500, 2400),
+            mumbai: generateCityData("Mumbai", 1000, 1800, 3000),
+            pune: generateCityData("Pune", 800, 1500, 2500),
+            varanasi: generateCityData("Varanasi", 600, 1200, 2000),
+            udaipur: generateCityData("Udaipur", 700, 1400, 2300),
+            kochi: generateCityData("Kochi", 700, 1300, 2200),
+            amritsar: generateCityData("Amritsar", 600, 1200, 2000),
+            goa: generateCityData("Goa", 900, 1600, 2800)
+        };
+
+        function generateCityData(cityName, singlePrice, doublePrice, suitePrice) {
+            const locations = [
+                "Near Railway Station",
+                "City Center",
+                "Market Area",
+                "Tourist Hub",
+                "Main Street"
+            ];
+
+            return [
+                {
+                    name: `${cityName} Tourist Lodge`,
+                    roomTypes: ["Single", "Double", "Suite"],
+                    availableRooms: {
+                        Single: Math.floor(Math.random() * 10) + 5,
+                        Double: Math.floor(Math.random() * 8) + 3,
+                        Suite: Math.floor(Math.random() * 5) + 2
+                    },
+                    amenities: {
+                        ac: true,
+                        floor: "Ground Floor",
+                        electricity: "24/7 Power Backup",
+                        water: "24 hours"
+                    },
+                    price: {
+                        Single: singlePrice,
+                        Double: doublePrice,
+                        Suite: suitePrice
+                    },
+                    contact: {
+                        phone: "+91-" + Math.floor(Math.random() * 9000000000 + 1000000000),
+                        email: `touristlodge${cityName.toLowerCase()}@gmail.com`,
+                        address: `123 ${locations[Math.floor(Math.random() * locations.length)]}, ${cityName}`,
+                        manager: "Mr. " + ["Sharma", "Patel", "Kumar", "Singh", "Reddy"][Math.floor(Math.random() * 5)]
+                    }
+                },
+                {
+                    name: `${cityName} Budget Stay`,
+                    roomTypes: ["Single", "Double"],
+                    availableRooms: {
+                        Single: Math.floor(Math.random() * 8) + 3,
+                        Double: Math.floor(Math.random() * 6) + 2
+                    },
+                    amenities: {
+                        ac: true,
+                        floor: "First Floor",
+                        electricity: "24/7 Power Backup",
+                        water: "24 hours"
+                    },
+                    price: {
+                        Single: singlePrice - 100,
+                        Double: doublePrice - 200
+                    },
+                    contact: {
+                        phone: "+91-" + Math.floor(Math.random() * 9000000000 + 1000000000),
+                        email: `budgetstay${cityName.toLowerCase()}@gmail.com`,
+                        address: `456 ${locations[Math.floor(Math.random() * locations.length)]}, ${cityName}`,
+                        manager: "Mr. " + ["Verma", "Gupta", "Rao", "Joshi", "Khan"][Math.floor(Math.random() * 5)]
+                    }
+                }
+            ];
+        }
+
+        function searchRooms() {
+            const cityInput = document.getElementById('city-input');
+            const dateInput = document.getElementById('date-input');
+            const loader = document.getElementById('loader');
+            const noResults = document.getElementById('no-results');
+            const roomsContainer = document.getElementById('rooms-container');
+
+            // Get the entered city
+            let selectedCity = cityInput.value.toLowerCase().trim();
+
+            // Show loader
+            loader.style.display = 'block';
+            noResults.style.display = 'none';
+            roomsContainer.innerHTML = '';
+
+            // Simulate API call delay
+            setTimeout(() => {
+                let rooms;
+                
+                // Check if the city exists in our predefined data
+                if (dummyRoomData[selectedCity]) {
+                    rooms = dummyRoomData[selectedCity];
+                } else {
+                    // Generate random data for cities not in our predefined list
+                    rooms = generateRandomRoomData();
+                }
+
+                loader.style.display = 'none';
+
+                if (!rooms || rooms.length === 0) {
+                    noResults.style.display = 'block';
+                    return;
+                }
+
+                rooms.forEach(property => {
+                    const propertyCard = document.createElement('div');
+                    propertyCard.className = 'property-card';
+                    propertyCard.innerHTML = `
+                        <h2>${property.name}</h2>
+                        <div class="room-types">
+                            <h3>Available Rooms:</h3>
+                            ${Object.entries(property.availableRooms).map(([type, count]) => `
+                                <div class="room-type">
+                                    <span>${type}: ${count} rooms</span>
+                                    <span>₹${property.price[type]}/night</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="amenities">
+                            <h3>Amenities:</h3>
+                            <p>AC: ${property.amenities.ac ? 'Yes' : 'No'}</p>
+                            <p>Floor: ${property.amenities.floor}</p>
+                            <p>Electricity: ${property.amenities.electricity}</p>
+                            <p>Water Availability: ${property.amenities.water}</p>
+                        </div>
+                        <div class="contact-info">
+                            <h3>Contact Details:</h3>
+                            <p>📞 Phone: ${property.contact.phone}</p>
+                            <p>📧 Email: ${property.contact.email}</p>
+                            <p>📍 Address: ${property.contact.address}</p>
+                            <p>👤 Manager: ${property.contact.manager}</p>
+                        </div>
+                    `;
+                    roomsContainer.appendChild(propertyCard);
+                });
+            }, 1000);
+        }
+
+        function generateRandomRoomData() {
+            // Generate random room data for cities not in our predefined list
+            const guestHouseNames = [
+                "City View Inn",
+                "Comfort Stay",
+                "Heritage Guest House",
+                "Royal Rooms",
+                "Tourist Lodge"
+            ];
+
+            return [{
+                name: guestHouseNames[Math.floor(Math.random() * guestHouseNames.length)],
+                roomTypes: ["Single", "Double", "Suite"],
+                availableRooms: {
+                    Single: Math.floor(Math.random() * 10) + 1,
+                    Double: Math.floor(Math.random() * 8) + 1,
+                    Suite: Math.floor(Math.random() * 5) + 1
+                },
+                amenities: {
+                    ac: Math.random() > 0.3,
+                    floor: ["Ground Floor", "First Floor", "Second Floor"][Math.floor(Math.random() * 3)],
+                    electricity: Math.random() > 0.5 ? "24/7 Power Backup" : "20 hours backup",
+                    water: Math.random() > 0.5 ? "24 hours" : "20 hours"
+                },
+                price: {
+                    Single: Math.floor(Math.random() * 1000) + 1000,
+                    Double: Math.floor(Math.random() * 1500) + 2000,
+                    Suite: Math.floor(Math.random() * 2000) + 3000
+                }
+            }];
+        }
+    </script>
+
+    <style>
+        .rooms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .property-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .room-types {
+            margin: 15px 0;
+        }
+
+        .room-type {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 5px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .amenities {
+            margin: 15px 0;
+        }
+
+        .book-now {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .book-now:hover {
+            background: #45a049;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .city-input-container {
+            position: relative;
+            width: 200px;
+        }
+
+        #city-input {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 200px;
+            font-size: 14px;
+        }
+
+        #date-input {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        #search-button {
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #search-button:hover {
+            background: #45a049;
+        }
+
+        .contact-info {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .contact-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
 </body>
 </html>

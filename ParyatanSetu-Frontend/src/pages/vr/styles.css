@@ -13,6 +13,8 @@ body {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
+    background-image: url("../imageSection/vrback.png");
+    background-size:cover;
 }
 
 .search-container {

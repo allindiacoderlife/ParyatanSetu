@@ -79,7 +79,8 @@ a {
 
 .nav-items {
     display: flex;
-    align-items: center;
+    align-items:center ;
+    /* justify-content: space-between; */
 }
 
 #google_translate_element a{
@@ -87,7 +88,7 @@ a {
 }
 .goog-te-gadget {
     margin-top:14px;
-    margin-right: 10px;
+    margin-right: 80px;
     text-align: center;
 }
 

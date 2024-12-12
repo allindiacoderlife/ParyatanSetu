@@ -19,7 +19,17 @@
         <div class="main-content">
             <h1>Local Guides</h1>
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Please enter a destination place" required>
+                <div class="search-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        list="cities-list" 
+                        placeholder="Type or select a city"
+                        autocomplete="off"
+                        required
+                    >
+                    <datalist id="cities-list"></datalist>
+                </div>
                 <input type="date" id="date-input" required>
                 <button id="search-button">Search</button>
             </div>
@@ -27,9 +37,9 @@
     </section>
 
     <section class="results-section">
-        <div class="loader" id="loader"></div>
-        <div class="no-results" id="no-results">No data found</div>
-        <div class="ashoka-chakra"></div>
+        <div class="loader" id="loader" style="display: none;">Loading...</div>
+        <div class="no-results" id="no-results" style="display: none;">No guides found</div>
+        <div id="guides-results"></div>
     </section>
 
     <script src="script.js"></script>
